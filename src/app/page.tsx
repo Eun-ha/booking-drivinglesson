@@ -26,6 +26,7 @@ export default function Home() {
     const query = await getDoc(doc(fireStore, "사용자", "2345"));
     console.log(query.data());
   };
+
   return (
     <div>
       <h1>운전연수 예약 페이지 메인입니다.</h1>
