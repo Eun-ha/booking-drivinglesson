@@ -2,43 +2,31 @@
 import { useEffect, useState } from "react";
 import fireStore from "../firebase/firestore";
 import { collection, doc, getDoc, getDocs } from "firebase/firestore";
+import { Info } from "../types/type";
 export default function List() {
-  const [list, setList] = useState([{}]);
+  const [list, setList] = useState<Info[]>([]);
 
   useEffect(() => {
     loadDb();
   }, []);
 
   const loadDb = async () => {
-    /*
-    const query = await getDoc(
-      doc(
-        fireStore,
-        "Lists",
-        "QGK1Y2wgncbZmh31SmC9",
-        "user",
-        "Ri4IIq0LpkRExqXzZVhY"
-      )
-    );
-    console.log(query.data());
-    */
     const querySnapshot = await getDocs(collection(fireStore, "Lists"));
-
+    const arr: Info[] = [];
     querySnapshot.forEach((doc) => {
       console.log(doc.data());
-      let text = doc.data();
-      setList([...list, text]);
-      console.log("inner");
-      console.log(list);
+      arr.push(doc.data());
     });
-  };
 
-  console.log("test");
-  console.log(list);
+    setList(arr);
+  };
 
   return (
     <div>
       <h1>리스트 페이지 입니다.</h1>
+      {list.map((list) => (
+        <p key={list.index}>{list.instructor}</p>
+      ))}
     </div>
   );
 }

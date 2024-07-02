@@ -6,7 +6,7 @@ import { login, logout, onUserStateChange } from "./firebase/firebasedb";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [user, setUser] = useState<any>();
+  const [user, setUser] = useState();
 
   useEffect(() => {
     onUserStateChange((user) => {
