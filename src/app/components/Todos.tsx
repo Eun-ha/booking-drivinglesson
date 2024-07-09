@@ -1,40 +1,17 @@
 import { useState } from "react";
 import { useAppDispatch } from "../store/store";
-import { changeInput, insert, remove, toggle } from "../store/todoSlice";
-
-const TodoItem = ({ todo }) => {
-  const [id, setId] = useState(0);
-  const dispatch = useAppDispatch();
-
-  const removeHandler = (e) => {
-    setId(todo.id);
-    dispatch(remove(id));
-  };
-
-  const toggleHandler = (e) => {
-    setId(todo.id);
-    dispatch(toggle(id));
-  };
-
-  return (
-    <div>
-      <input type="checkbox" onClick={toggleHandler} />
-      <span>{todo.text}</span>
-      <button onClick={removeHandler}>삭제</button>
-    </div>
-  );
-};
+import { changeInput, insert } from "../store/todoSlice";
+import TodoItem from "./TodoItem";
 
 const Todos = ({ input, todos }) => {
   const [text, setText] = useState(input);
-  const dispatch = useAppDispatch();
   const [add, setAdd] = useState({ id: 5, text: "열심히하자", done: false });
+  const dispatch = useAppDispatch();
 
   const onSubmit = (e) => {
     e.preventDefault();
     setAdd({ id: 8, text: text, done: false });
     dispatch(insert(add));
-    console.log("제출");
   };
 
   const onChangeHandler = (e) => {
@@ -50,7 +27,7 @@ const Todos = ({ input, todos }) => {
       </form>
       <div>
         {todos.map((todos) => (
-          <TodoItem todo={todos} onToggle={toggle} onRemove={remove} />
+          <TodoItem todo={todos} />
         ))}
       </div>
     </div>
