@@ -8,6 +8,8 @@ import { decrease, increase } from "./store/counterSlice";
 
 export default function Home() {
   const number = useAppSelector((state) => state.counter.number);
+  const input = useAppSelector((state) => state.todos.input);
+  const todos = useAppSelector((state) => state.todos.todos);
 
   return (
     <div>
@@ -16,7 +18,7 @@ export default function Home() {
         <Button />
         <Link href="/list">Booking List</Link>
         <Counter number={number} type={increase} type2={decrease} />
-        <Todos />
+        <Todos input={input} todos={todos} />
       </div>
     </div>
   );

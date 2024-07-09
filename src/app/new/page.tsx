@@ -41,6 +41,9 @@ export default function NewCreate() {
   useEffect(() => {
     onChange(null);
   }, []);
+
+  console.log(value);
+
   return (
     <form onSubmit={onSubmit}>
       <label>

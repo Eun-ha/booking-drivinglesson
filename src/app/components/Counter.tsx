@@ -1,4 +1,3 @@
-import { decrease, increase } from "../store/counterSlice";
 import { useAppDispatch } from "../store/store";
 
 const Counter = ({ number, type, type2 }) => {
