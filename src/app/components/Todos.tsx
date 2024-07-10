@@ -6,11 +6,13 @@ import TodoItem from "./TodoItem";
 const Todos = ({ input, todos }) => {
   const [text, setText] = useState(input);
   const [add, setAdd] = useState({ id: 5, text: "열심히하자", done: false });
+  const [id, setId] = useState(12);
   const dispatch = useAppDispatch();
 
   const onSubmit = (e) => {
     e.preventDefault();
-    setAdd({ id: 8, text: text, done: false });
+    setId(id + 1);
+    setAdd({ id: id, text: text, done: false });
     dispatch(insert(add));
   };
 
@@ -26,8 +28,8 @@ const Todos = ({ input, todos }) => {
         <button type="submit">등록</button>
       </form>
       <div>
-        {todos.map((todos) => (
-          <TodoItem todo={todos} />
+        {todos.map((todos, index) => (
+          <TodoItem key={index} todo={todos} />
         ))}
       </div>
     </div>

@@ -25,12 +25,12 @@ export default function Tbody() {
 
   return (
     <tbody>
-      {list.map((list) => (
-        <tr>
-          <td key={list.index}>{list.date}</td>
-          <td key={list.index}>{list.time}</td>
-          <td key={list.index}>{list.instructor}</td>
-          <td key={list.index}>{list.training}</td>
+      {list.map((list, index) => (
+        <tr key={index}>
+          <td>{list.date}</td>
+          <td>{list.time}</td>
+          <td>{list.instructor}</td>
+          <td>{list.training}</td>
         </tr>
       ))}
     </tbody>

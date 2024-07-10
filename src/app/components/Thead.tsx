@@ -4,8 +4,10 @@ export default function Thead() {
   return (
     <thead>
       <tr>
-        {theadtext.map((text) => (
-          <th scope="col">{text}</th>
+        {theadtext.map((text, index) => (
+          <th key={index} scope="col">
+            {text}
+          </th>
         ))}
       </tr>
     </thead>
