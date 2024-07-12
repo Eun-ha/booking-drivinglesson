@@ -1,17 +1,25 @@
-import { useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useAppDispatch } from "../store/store";
 import { remove, toggle } from "../store/todoSlice";
 
 const TodoItem = ({ todo }) => {
-  const [id, setId] = useState(0);
+  const [id, setId] = useState();
   const dispatch = useAppDispatch();
 
-  const removeHandler = (e) => {
+  console.log(todo);
+
+  useEffect(() => {
     setId(todo.id);
+  }, []);
+
+  const removeHandler = () => {
+    console.log(id);
+    setId(todo.id);
+    console.log(id);
     dispatch(remove(id));
   };
 
-  const toggleHandler = (e) => {
+  const toggleHandler = () => {
     setId(todo.id);
     dispatch(toggle(id));
   };

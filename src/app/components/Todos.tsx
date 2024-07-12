@@ -1,19 +1,24 @@
-import { useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import { useAppDispatch } from "../store/store";
 import { changeInput, insert } from "../store/todoSlice";
 import TodoItem from "./TodoItem";
 
 const Todos = ({ input, todos }) => {
   const [text, setText] = useState(input);
-  const [add, setAdd] = useState({ id: 5, text: "열심히하자", done: false });
+  const [add, setAdd] = useState({});
   const [id, setId] = useState(12);
   const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    setAdd({ id: id, text: text, done: false });
+  }, [text]);
 
   const onSubmit = (e) => {
     e.preventDefault();
     setId(id + 1);
     setAdd({ id: id, text: text, done: false });
     dispatch(insert(add));
+    setText("");
   };
 
   const onChangeHandler = (e) => {
