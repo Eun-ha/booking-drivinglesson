@@ -1,26 +1,14 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
-import "react-date-picker/dist/DatePicker.css";
-import dynamic from "next/dynamic";
+import { FormEvent } from "react";
+
 import Select from "react-select";
 
-const DatePicker = dynamic(() => import("react-date-picker"), { ssr: false });
+import Todos from "../components/Todos";
+import { useAppSelector } from "@/app/store/store";
 
-type ValuePiece = Date | null;
-type Value = ValuePiece | [ValuePiece, ValuePiece];
-
-const options = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" },
-];
-
-const options2 = [
-  { value: "홍길동", label: "홍길동" },
-  { value: "고영희", label: "고영희" },
-  { value: "김철수", label: "김철수" },
-];
+import PickerDate from "../components/PickerDate";
+import { instructor, time } from "../options/option";
 
 async function onSubmit(event: FormEvent<HTMLFormElement>) {
   event.preventDefault();
@@ -37,30 +25,29 @@ async function onSubmit(event: FormEvent<HTMLFormElement>) {
 }
 
 export default function NewCreate() {
-  const [value, onChange] = useState<Value>(new Date());
-  useEffect(() => {
-    onChange(null);
-  }, []);
-
-  console.log(value);
+  const input = useAppSelector((state) => state.todos.input);
+  const todos = useAppSelector((state) => state.todos.todos);
 
   return (
-    <form onSubmit={onSubmit}>
-      <label>
-        예약날짜 : <DatePicker onChange={onChange} value={value} />
-      </label>
-      <br></br>
-      <label>
-        예약시간 : <Select options={options} />
-      </label>
-      <br></br>
-      <label>
-        강사명 : <Select options={options2} />
-      </label>
-      <br></br>
-      <label>연수시간 : 3시간</label>
-      <br></br>
-      <button type="submit">Submit</button>
-    </form>
+    <div>
+      <form onSubmit={onSubmit}>
+        <label>
+          예약날짜 : <PickerDate />
+        </label>
+        <br></br>
+        <label>
+          예약시간 : <Select options={time} />
+        </label>
+        <br></br>
+        <label>
+          강사명 : <Select options={instructor} />
+        </label>
+        <br></br>
+        <label>연수시간 : 3시간</label>
+        <br></br>
+        <button type="submit">Submit</button>
+      </form>
+      <Todos input={input} todos={todos} />
+    </div>
   );
 }
