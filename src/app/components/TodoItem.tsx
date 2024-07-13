@@ -6,16 +6,14 @@ const TodoItem = ({ todo }) => {
   const [id, setId] = useState();
   const dispatch = useAppDispatch();
 
-  console.log(todo);
+  //console.log(todo);
 
   useEffect(() => {
     setId(todo.id);
   }, []);
 
   const removeHandler = () => {
-    console.log(id);
     setId(todo.id);
-    console.log(id);
     dispatch(remove(id));
   };
 

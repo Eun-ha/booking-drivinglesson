@@ -1,20 +1,17 @@
 "use client";
-import "react-date-picker/dist/DatePicker.css";
-import dynamic from "next/dynamic";
-import { useEffect, useState } from "react";
 
-const DatePicker = dynamic(() => import("react-date-picker"), { ssr: false });
+import React, { useState } from "react";
+import DatePicker from "react-datepicker";
 
-type ValuePiece = Date | null;
-type Value = ValuePiece | [ValuePiece, ValuePiece];
+import "react-datepicker/dist/react-datepicker.css";
+import "react-datepicker/dist/react-datepicker-cssmodules.css";
 
 export default function PickerDate() {
-  const [value, onChange] = useState<Value>(new Date());
-  useEffect(() => {
-    onChange(null);
-  }, []);
+  const [startDate, setStartDate] = useState(new Date());
 
-  console.log(value);
+  console.log(startDate);
 
-  return <DatePicker onChange={onChange} value={value} />;
+  return (
+    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+  );
 }
