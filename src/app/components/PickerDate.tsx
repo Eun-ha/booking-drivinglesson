@@ -1,17 +1,29 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import DatePicker from "react-datepicker";
 
 import "react-datepicker/dist/react-datepicker.css";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 
-export default function PickerDate() {
+export default function PickerDate({ handleDate }) {
   const [startDate, setStartDate] = useState(new Date());
 
-  console.log(startDate);
+  useEffect(() => {
+    handleClick();
+  }, [startDate]);
+
+  const handleClick = () => {
+    handleDate(startDate);
+  };
 
   return (
-    <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
+    <div>
+      <DatePicker
+        selected={startDate}
+        onChange={(date) => setStartDate(date)}
+        onSelect={handleClick}
+      />
+    </div>
   );
 }
