@@ -2,15 +2,12 @@
 
 import { FormEvent, useEffect, useState } from "react";
 import Select from "react-select";
-import Todos from "../components/Todos";
 import { useAppDispatch, useAppSelector } from "@/app/store/store";
 import PickerDate from "../components/PickerDate";
 import { instructor, time } from "../options/option";
 import { insert } from "../store/bookingSlice";
 
 export default function NewCreate() {
-  const todos = useAppSelector((state) => state.todos.todos);
-  const input = useAppSelector((state) => state.todos.input);
   const booking = useAppSelector((state) => state.booking.todos);
 
   const [date, setDate] = useState("");
@@ -18,7 +15,7 @@ export default function NewCreate() {
   const [id, setId] = useState(3);
 
   const [selectedTime, setselectedTime] = useState();
-  const [selectedInstructor, setselectedInstructor] = useState();
+  const [selectedInstructor, setselectedInstructor] = useState("");
 
   const handleSelectedTime = (e: any) => {
     setselectedTime(e.value);
@@ -64,23 +61,17 @@ export default function NewCreate() {
     });
     dispatch(insert(add));
 
-    console.log(date);
-    console.log(add);
     console.log("업데이트 완료");
   }
 
   const onSetDate = (props) => {
-    setDate(props);
+    const date = props;
+    const newDate = date.substring(0, 10);
+
+    setDate(newDate);
   };
 
-  console.log("예약내역");
   console.log(booking);
-
-  console.log("예약시간");
-  console.log(selectedTime);
-
-  console.log("예약강사");
-  console.log(selectedInstructor);
 
   return (
     <div>

@@ -14,7 +14,7 @@ export default function PickerDate({ handleDate }) {
   }, [startDate]);
 
   const handleClick = () => {
-    handleDate(startDate);
+    handleDate(startDate.toISOString());
   };
 
   return (

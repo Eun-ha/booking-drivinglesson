@@ -1,8 +1,8 @@
 export const time = [
-  { value: "9", label: "9" },
-  { value: "12", label: "12" },
-  { value: "3", label: "3" },
-  { value: "6", label: "6" },
+  { value: 9, label: "9" },
+  { value: 12, label: "12" },
+  { value: 3, label: "3" },
+  { value: 6, label: "6" },
 ];
 
 export const instructor = [
