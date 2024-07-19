@@ -3,14 +3,32 @@
 import { FormEvent, useEffect, useState } from "react";
 import Select from "react-select";
 import Todos from "../components/Todos";
-import { useAppSelector } from "@/app/store/store";
+import { useAppDispatch, useAppSelector } from "@/app/store/store";
 import PickerDate from "../components/PickerDate";
 import { instructor, time } from "../options/option";
+import { insert } from "../store/bookingSlice";
 
 export default function NewCreate() {
   const todos = useAppSelector((state) => state.todos.todos);
   const input = useAppSelector((state) => state.todos.input);
+  const booking = useAppSelector((state) => state.booking.todos);
+
   const [date, setDate] = useState("");
+  const [add, setAdd] = useState({});
+  const [id, setId] = useState(3);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    setAdd({
+      id: id,
+      date: date,
+      time: 3,
+      instructor: "테스터",
+      training: "3시간",
+      done: false,
+    });
+  }, [date]);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -25,14 +43,28 @@ export default function NewCreate() {
     const data = await response.json();
     // 
     */
+    setId(id + 1);
+    setAdd({
+      id: id,
+      date: date,
+      time: 3,
+      instructor: "테스터",
+      training: "3시간",
+      done: false,
+    });
+    dispatch(insert(add));
 
     console.log(date);
+    console.log(add);
     console.log("업데이트 완료");
   }
 
   const onSetDate = (props) => {
     setDate(props);
   };
+
+  console.log("예약내역");
+  console.log(booking);
 
   return (
     <div>
@@ -53,7 +85,6 @@ export default function NewCreate() {
         <br></br>
         <button type="submit">Submit</button>
       </form>
-      <Todos input={input} todos={todos} />
     </div>
   );
 }

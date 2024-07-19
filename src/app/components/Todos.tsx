@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useAppDispatch } from "../store/store";
 import { changeInput, insert } from "../store/todoSlice";
 import TodoItem from "./TodoItem";
