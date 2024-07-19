@@ -10,7 +10,6 @@ export const bookingSlice = createSlice({
         date: "20240719",
         time: 9,
         instructor: "홍길동",
-        training: "3시간",
         done: true,
       },
       {
@@ -18,7 +17,6 @@ export const bookingSlice = createSlice({
         date: "20240720",
         time: 12,
         instructor: "고영희",
-        training: "3시간",
         done: true,
       },
     ],

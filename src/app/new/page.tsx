@@ -17,18 +17,28 @@ export default function NewCreate() {
   const [add, setAdd] = useState({});
   const [id, setId] = useState(3);
 
+  const [selectedTime, setselectedTime] = useState();
+  const [selectedInstructor, setselectedInstructor] = useState();
+
+  const handleSelectedTime = (e: any) => {
+    setselectedTime(e.value);
+  };
+
+  const handleSelectedInstructor = (e: any) => {
+    setselectedInstructor(e.value);
+  };
+
   const dispatch = useAppDispatch();
 
   useEffect(() => {
     setAdd({
       id: id,
       date: date,
-      time: 3,
-      instructor: "테스터",
-      training: "3시간",
+      time: selectedTime,
+      instructor: selectedInstructor,
       done: false,
     });
-  }, [date]);
+  }, [date, selectedTime, selectedInstructor]);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -47,8 +57,8 @@ export default function NewCreate() {
     setAdd({
       id: id,
       date: date,
-      time: 3,
-      instructor: "테스터",
+      time: selectedTime,
+      instructor: selectedInstructor,
       training: "3시간",
       done: false,
     });
@@ -66,6 +76,12 @@ export default function NewCreate() {
   console.log("예약내역");
   console.log(booking);
 
+  console.log("예약시간");
+  console.log(selectedTime);
+
+  console.log("예약강사");
+  console.log(selectedInstructor);
+
   return (
     <div>
       <form onSubmit={onSubmit}>
@@ -74,11 +90,12 @@ export default function NewCreate() {
         </label>
         <br></br>
         <label>
-          예약시간 : <Select options={time} />
+          예약시간 : <Select options={time} onChange={handleSelectedTime} />
         </label>
         <br></br>
         <label>
-          강사명 : <Select options={instructor} />
+          강사명 :
+          <Select options={instructor} onChange={handleSelectedInstructor} />
         </label>
         <br></br>
         <label>연수시간 : 3시간</label>
