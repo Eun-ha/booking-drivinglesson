@@ -6,18 +6,14 @@ export const bookingSlice = createSlice({
     input: "",
     todos: [
       {
-        id: 1,
         date: "20240719",
         time: 9,
         instructor: "홍길동",
-        done: true,
       },
       {
-        id: 2,
         date: "20240720",
         time: 12,
         instructor: "고영희",
-        done: true,
       },
     ],
   },

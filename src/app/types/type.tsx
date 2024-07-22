@@ -1,6 +1,5 @@
 export interface Info {
-  date: number;
+  date: string;
   time: number;
   instructor: string;
-  training: number;
 }
