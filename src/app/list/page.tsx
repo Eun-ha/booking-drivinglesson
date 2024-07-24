@@ -1,9 +1,6 @@
 "use client";
 import Button from "../components/Button";
-import Counter from "../components/Counter";
 import Table from "../components/Table";
-import { useAppSelector } from "../store/store";
-import { decrease2, increase2 } from "../store/ageSlice";
 import Link from "next/link";
 export default function List() {
   return (

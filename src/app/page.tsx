@@ -1,9 +1,6 @@
 "use client";
 import Link from "next/link";
 import Button from "./components/Button";
-import Counter from "./components/Counter";
-import { useAppSelector } from "@/app/store/store";
-import { decrease, increase } from "./store/counterSlice";
 
 export default function Home() {
   return (

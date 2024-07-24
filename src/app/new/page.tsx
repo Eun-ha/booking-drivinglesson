@@ -64,10 +64,20 @@ export default function NewCreate() {
     console.log("업데이트 완료");
   }
 
-  const onSetDate = (props) => {
+  const onSetDate = (props: Date | null | undefined) => {
     const date = props;
-    const newDate = date.substring(0, 10);
+    const year = date?.getFullYear();
+    let month;
 
+    if (date) {
+      month = date?.getMonth() + 1;
+    } else {
+      console.log("no date");
+    }
+
+    const day = date?.getDate();
+    const newDate = `${year}-${month}-${day}`;
+    console.log(newDate);
     setDate(newDate);
   };
 

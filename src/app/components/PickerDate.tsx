@@ -6,15 +6,20 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 
-export default function PickerDate({ handleDate }) {
-  const [startDate, setStartDate] = useState(new Date());
+interface PickerDateProps {
+  handleDate: (props: Date | null | undefined) => void;
+}
+export default function PickerDate({ handleDate }: PickerDateProps) {
+  const [startDate, setStartDate] = useState<Date | null | undefined>(
+    new Date()
+  );
 
   useEffect(() => {
     handleClick();
   }, [startDate]);
 
   const handleClick = () => {
-    handleDate(startDate.toISOString());
+    handleDate(startDate);
   };
 
   return (

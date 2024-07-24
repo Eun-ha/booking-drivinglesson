@@ -30,7 +30,7 @@ export default function Tbody() {
           <td>{list.date}</td>
           <td>{list.time}</td>
           <td>{list.instructor}</td>
-          <td>{list.training}</td>
+          <td>3시간</td>
         </tr>
       ))}
     </tbody>
