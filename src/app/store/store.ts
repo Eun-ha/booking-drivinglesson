@@ -1,16 +1,26 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { combineReducers, configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import { counterReducer } from "./counterSlice";
 import { ageReducer } from "./ageSlice";
 import { todoReducer } from "./todoSlice";
 import { bookingReducer } from "./bookingSlice";
+import storage from "redux-persist/lib/storage";
+import { persistReducer } from "redux-persist";
+
+const persistConfig = {
+  key: "todos",
+  storage,
+  whitelist: ["todos"],
+};
+
+const persistedReducer = persistReducer(persistConfig, bookingReducer);
 
 export const store = configureStore({
   reducer: {
     counter: counterReducer,
     age: ageReducer,
     todos: todoReducer,
-    booking: bookingReducer,
+    booking: persistedReducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }),

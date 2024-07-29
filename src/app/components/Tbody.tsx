@@ -4,9 +4,12 @@ import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import fireStore from "../firebase/firestore";
 import { Info } from "../types/type";
+import { useAppSelector } from "../store/store";
 
 export default function Tbody() {
-  const [list, setList] = useState<Info[]>([]);
+  //const [list, setList] = useState<Info[]>([]);
+
+  /*
 
   useEffect(() => {
     loadDb();
@@ -21,11 +24,13 @@ export default function Tbody() {
     });
 
     setList(arr);
-  };
+  };*/
+
+  const booking = useAppSelector((state) => state.booking.todos);
 
   return (
     <tbody>
-      {list.map((list, index) => (
+      {booking.map((list: Info, index) => (
         <tr key={index}>
           <td>{list.date}</td>
           <td>{list.time}</td>

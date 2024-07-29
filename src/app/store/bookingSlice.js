@@ -1,22 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+const initialState = {
+  todos: [],
+};
+
 export const bookingSlice = createSlice({
   name: "booking",
-  initialState: {
-    input: "",
-    todos: [
-      {
-        date: "20240719",
-        time: 9,
-        instructor: "홍길동",
-      },
-      {
-        date: "20240720",
-        time: 12,
-        instructor: "고영희",
-      },
-    ],
-  },
+  initialState: initialState,
   reducers: {
     changeInput: (state, action) => ({
       ...state,
