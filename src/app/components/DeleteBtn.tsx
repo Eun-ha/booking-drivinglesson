@@ -2,16 +2,14 @@
 
 import { useAppDispatch } from "../store/store";
 import { remove } from "../store/bookingSlice";
-import { Info } from "../types/type";
+import toast from "react-hot-toast";
 
 export default function DeleteBtn(id: { id: number }) {
   const currentId = id;
   const dispatch = useAppDispatch();
-  console.log(currentId);
   const handleDelete = () => {
-    console.log(currentId.id);
     dispatch(remove(currentId.id));
-    console.log("삭제");
+    toast.success("삭제가 완료되었습니다.", { duration: 2000 });
   };
 
   return <button onClick={handleDelete}>삭제</button>;
