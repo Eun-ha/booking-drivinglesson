@@ -4,7 +4,9 @@ import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import fireStore from "../firebase/firestore";
 import { Info } from "../types/type";
-import { useAppSelector } from "../store/store";
+import { useAppDispatch, useAppSelector } from "../store/store";
+import { remove } from "../store/bookingSlice";
+import DeleteBtn from "./DeleteBtn";
 
 export default function Tbody() {
   //const [list, setList] = useState<Info[]>([]);
@@ -36,6 +38,9 @@ export default function Tbody() {
           <td>{list.time}</td>
           <td>{list.instructor}</td>
           <td>3시간</td>
+          <td>
+            <DeleteBtn id={list.id} />
+          </td>
         </tr>
       ))}
     </tbody>

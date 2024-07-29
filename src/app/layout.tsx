@@ -5,6 +5,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
+import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -20,6 +21,7 @@ export default function RootLayout({
       <body className={inter.className}>
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
+            <Toaster position="bottom-center" reverseOrder={true} />
             {children}
           </PersistGate>
         </Provider>
