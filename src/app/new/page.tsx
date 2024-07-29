@@ -6,6 +6,7 @@ import { useAppDispatch, useAppSelector } from "@/app/store/store";
 import PickerDate from "../components/PickerDate";
 import { instructor, time } from "../options/option";
 import { insert } from "../store/bookingSlice";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function NewCreate() {
   const booking = useAppSelector((state) => state.booking.todos);
@@ -60,8 +61,7 @@ export default function NewCreate() {
       done: false,
     });
     dispatch(insert(add));
-
-    console.log("업데이트 완료");
+    toast.success("업데이트 완료");
   }
 
   const onSetDate = (props: Date | null | undefined) => {
@@ -85,6 +85,7 @@ export default function NewCreate() {
 
   return (
     <div>
+      <Toaster position="bottom-center" reverseOrder={true} />
       <form onSubmit={onSubmit}>
         <label>
           예약날짜 : <PickerDate handleDate={onSetDate} />
