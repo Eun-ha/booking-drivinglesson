@@ -7,7 +7,7 @@ export default function Button() {
   const [user, setUser] = useState();
 
   useEffect(() => {
-    onUserStateChange((user) => {
+    onUserStateChange((user: any) => {
       console.log(user);
       setUser(user);
     });

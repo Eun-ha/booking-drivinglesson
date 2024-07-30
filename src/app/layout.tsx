@@ -9,7 +9,7 @@ import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
 
-export let persistor = persistStore(store);
+let persistor = persistStore(store);
 
 export default function RootLayout({
   children,

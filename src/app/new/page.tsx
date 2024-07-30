@@ -1,12 +1,13 @@
 "use client";
 
-import { FormEvent, useEffect, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 import Select from "react-select";
 import { useAppDispatch, useAppSelector } from "@/app/store/store";
 import PickerDate from "../components/PickerDate";
 import { instructor, time } from "../options/option";
 import { insert } from "../store/bookingSlice";
 import toast from "react-hot-toast";
+import React from "react";
 
 export default function NewCreate() {
   const booking = useAppSelector((state) => state.booking.todos);
@@ -16,14 +17,17 @@ export default function NewCreate() {
   const [id, setId] = useState(3);
 
   const [selectedTime, setselectedTime] = useState();
-  const [selectedInstructor, setselectedInstructor] = useState("");
+  const [selectedInstructor, setselectedInstructor] = useState();
+
+  const firstSelect = useRef<any>(null);
+  const secondSelect = useRef<any>(null);
 
   const handleSelectedTime = (e: any) => {
-    setselectedTime(e.value);
+    setselectedTime(e?.value);
   };
 
   const handleSelectedInstructor = (e: any) => {
-    setselectedInstructor(e.value);
+    setselectedInstructor(e?.value);
   };
 
   const dispatch = useAppDispatch();
@@ -36,7 +40,7 @@ export default function NewCreate() {
       instructor: selectedInstructor,
       done: false,
     });
-  }, [date, selectedTime, selectedInstructor]);
+  }, [id, date, selectedTime, selectedInstructor]);
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -60,8 +64,22 @@ export default function NewCreate() {
       training: "3시간",
       done: false,
     });
+
+    if (selectedTime === undefined) {
+      toast.error("예약 시간을 선택해 주세요.", { duration: 2000 });
+      return;
+    }
+    if (selectedInstructor === "") {
+      toast.error("강사를 선택해 주세요.", { duration: 2000 });
+      return;
+    }
     dispatch(insert(add));
     toast.success("예약이 완료되었습니다.", { duration: 2000 });
+
+    if (firstSelect.current || secondSelect.current) {
+      firstSelect.current.clearValue();
+      secondSelect.current.clearValue();
+    }
   }
 
   const onSetDate = (props: Date | null | undefined) => {
@@ -90,12 +108,21 @@ export default function NewCreate() {
         </label>
         <br></br>
         <label>
-          예약시간 : <Select options={time} onChange={handleSelectedTime} />
+          예약시간 :
+          <Select
+            options={time}
+            onChange={handleSelectedTime}
+            ref={firstSelect}
+          />
         </label>
         <br></br>
         <label>
           강사명 :
-          <Select options={instructor} onChange={handleSelectedInstructor} />
+          <Select
+            options={instructor}
+            onChange={handleSelectedInstructor}
+            ref={secondSelect}
+          />
         </label>
         <br></br>
         <label>연수시간 : 3시간</label>
