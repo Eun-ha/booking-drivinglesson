@@ -8,13 +8,14 @@ import { instructor, time } from "../options/option";
 import { insert } from "../store/bookingSlice";
 import toast from "react-hot-toast";
 import React from "react";
+import uuid from "react-uuid";
 
 export default function NewCreate() {
   const booking = useAppSelector((state) => state.booking.todos);
 
   const [date, setDate] = useState("");
   const [add, setAdd] = useState({});
-  const [id, setId] = useState(3);
+  const [id, setId] = useState("");
 
   const [selectedTime, setselectedTime] = useState();
   const [selectedInstructor, setselectedInstructor] = useState();
@@ -34,7 +35,7 @@ export default function NewCreate() {
 
   useEffect(() => {
     setAdd({
-      id: id,
+      id: uuid(),
       date: date,
       time: selectedTime,
       instructor: selectedInstructor,
@@ -55,7 +56,7 @@ export default function NewCreate() {
     const data = await response.json();
     // 
     */
-    setId(id + 1);
+    setId(uuid());
     setAdd({
       id: id,
       date: date,
