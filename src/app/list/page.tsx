@@ -1,8 +1,8 @@
-"use client";
 import Button from "../components/Button";
 import Table from "../components/Table";
 import Link from "next/link";
 import { useAppSelector } from "../store/store";
+
 export default function List() {
   return (
     <div>

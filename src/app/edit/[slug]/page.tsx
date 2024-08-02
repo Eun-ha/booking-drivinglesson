@@ -3,79 +3,77 @@
 import { FormEvent, useEffect, useRef, useState } from "react";
 import Select from "react-select";
 import { useAppDispatch, useAppSelector } from "@/app/store/store";
-import PickerDate from "../components/PickerDate";
-import { selectOptionInstructor, selectOptiontime } from "../options/option";
-import { insert } from "../store/bookingSlice";
+import PickerDate from "../../components/PickerDate";
+import { selectOptionInstructor, selectOptiontime } from "../../options/option";
+import { edit } from "../../store/bookingSlice";
 import toast from "react-hot-toast";
 import React from "react";
 import uuid from "react-uuid";
 import Link from "next/link";
 
-export default function NewCreate() {
+type Props = {
+  params: {
+    slug: string;
+  };
+};
+
+export default function Edit({ params }: Props) {
   const booking = useAppSelector((state) => state.booking.todos);
+  const current = booking.find(({ id }) => id === params.slug);
+
+  console.log("초기값");
+  console.log(current);
+
+  const { id, date, time, instructor } = current!;
 
   const [add, setAdd] = useState({});
-
-  const [id, setId] = useState("");
-  const [date, setDate] = useState("");
-
-  const [selectedTime, setselectedTime] = useState();
-  const [selectedInstructor, setselectedInstructor] = useState();
+  const [currentDate, setCurrentDate] = useState("");
+  const [currentTime, setCurrentTime] = useState();
+  const [currentInstructor, setCurrentInstructor] = useState();
 
   const firstSelect = useRef<any>(null);
   const secondSelect = useRef<any>(null);
 
-  const handleSelectedTime = (e: any) => {
-    setselectedTime(e?.value);
-  };
-
-  const handleSelectedInstructor = (e: any) => {
-    setselectedInstructor(e?.value);
-  };
-
   const dispatch = useAppDispatch();
 
   useEffect(() => {
+    setCurrentDate(date);
+    setCurrentTime(time);
+    setCurrentInstructor(instructor);
+  }, []);
+
+  useEffect(() => {
     setAdd({
-      id: uuid(),
-      date: date,
-      time: selectedTime,
-      instructor: selectedInstructor,
+      id,
+      date: currentDate,
+      time: currentTime,
+      instructor: currentInstructor,
     });
-  }, [id, date, selectedTime, selectedInstructor]);
+  }, [currentDate, currentTime, currentInstructor]);
+
+  const handleSelectedTime = (e: any) => {
+    setCurrentTime(e?.value);
+  };
+
+  const handleSelectedInstructor = (e: any) => {
+    setCurrentInstructor(e?.value);
+  };
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    /*
-    const formData = new FormData(event.currentTarget);
-    const response = await fetch("/api/submit", {
-      method: "POST",
-      body: formData,
-    });
 
-    // Handle response if necessary
-    const data = await response.json();
-    // 
-    */
-    setId(uuid());
     setAdd({
-      id: id,
-      date: date,
-      time: selectedTime,
-      instructor: selectedInstructor,
+      id,
+      date: currentDate,
+      time: currentTime,
+      instructor: currentInstructor,
     });
 
-    if (selectedTime === undefined) {
-      toast.error("예약 시간을 선택해 주세요.", { duration: 2000 });
-      return;
-    }
-    if (selectedInstructor === "") {
-      toast.error("강사를 선택해 주세요.", { duration: 2000 });
-      return;
-    }
+    dispatch(edit(add));
+    toast.success("수정이 완료되었습니다.", { duration: 2000 });
 
-    dispatch(insert(add));
-    toast.success("예약이 완료되었습니다.", { duration: 2000 });
+    console.log("add value");
+    console.log(add);
 
     if (firstSelect.current || secondSelect.current) {
       firstSelect.current.clearValue();
@@ -96,7 +94,7 @@ export default function NewCreate() {
 
     const day = date?.getDate();
     const newDate = `${year}-${month}-${day}`;
-    setDate(newDate);
+    setCurrentDate(newDate);
   };
 
   console.log(booking);
@@ -106,11 +104,12 @@ export default function NewCreate() {
       <Link href="/list">예약 리스트 페이지로 이동하기</Link>
       <form onSubmit={onSubmit}>
         <label>
-          예약날짜 : <PickerDate handleDate={onSetDate} />
+          예약날짜 : {currentDate}
+          <PickerDate handleDate={onSetDate} />
         </label>
         <br></br>
         <label>
-          예약시간 :
+          예약시간 : {currentTime}
           <Select
             options={selectOptiontime}
             onChange={handleSelectedTime}
@@ -119,7 +118,7 @@ export default function NewCreate() {
         </label>
         <br></br>
         <label>
-          강사명 :
+          강사명 :{currentInstructor}
           <Select
             options={selectOptionInstructor}
             onChange={handleSelectedInstructor}
@@ -129,7 +128,7 @@ export default function NewCreate() {
         <br></br>
         <label>연수시간 : 3시간</label>
         <br></br>
-        <button type="submit">Submit</button>
+        <button type="submit">Update</button>
       </form>
     </div>
   );

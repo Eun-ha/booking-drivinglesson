@@ -1,5 +1,5 @@
 export interface Info {
-  id: number;
+  id: string;
   date: string;
   time: number;
   instructor: string;
