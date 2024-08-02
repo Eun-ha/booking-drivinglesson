@@ -6,7 +6,6 @@ import { store } from "./store/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import { Toaster } from "react-hot-toast";
-import Link from "next/link";
 import LoginoutBtn from "./components/LoginoutBtn";
 import Navigation from "./components/Navigation";
 

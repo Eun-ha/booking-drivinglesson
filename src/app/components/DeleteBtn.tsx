@@ -1,6 +1,6 @@
 "use client";
 
-import { useAppDispatch, useAppSelector } from "../store/store";
+import { useAppDispatch } from "../store/store";
 import { remove } from "../store/bookingSlice";
 import toast from "react-hot-toast";
 

@@ -9,7 +9,6 @@ import { insert } from "../store/bookingSlice";
 import toast from "react-hot-toast";
 import React from "react";
 import uuid from "react-uuid";
-import Link from "next/link";
 
 export default function NewCreate() {
   const booking = useAppSelector((state) => state.booking.todos);

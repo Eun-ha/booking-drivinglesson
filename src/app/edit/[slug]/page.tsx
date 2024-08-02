@@ -19,9 +19,6 @@ export default function Edit({ params }: Props) {
   const booking = useAppSelector((state) => state.booking.todos);
   const current = booking.find(({ id }) => id === params.slug);
 
-  console.log("초기값");
-  console.log(current);
-
   const { id, date, time, instructor } = current!;
 
   const [add, setAdd] = useState({});
@@ -69,9 +66,6 @@ export default function Edit({ params }: Props) {
 
     dispatch(edit(add));
     toast.success("수정이 완료되었습니다.", { duration: 2000 });
-
-    console.log("add value");
-    console.log(add);
 
     if (firstSelect.current || secondSelect.current) {
       firstSelect.current.clearValue();
