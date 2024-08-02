@@ -103,7 +103,6 @@ export default function NewCreate() {
 
   return (
     <div>
-      <Link href="/list">예약 리스트 페이지로 이동하기</Link>
       <form onSubmit={onSubmit}>
         <label>
           예약날짜 : <PickerDate handleDate={onSetDate} />

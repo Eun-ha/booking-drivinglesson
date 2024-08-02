@@ -6,6 +6,9 @@ import { store } from "./store/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import { Toaster } from "react-hot-toast";
+import Link from "next/link";
+import LoginoutBtn from "./components/LoginoutBtn";
+import Navigation from "./components/Navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -22,6 +25,8 @@ export default function RootLayout({
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
             <Toaster position="bottom-center" reverseOrder={true} />
+            <LoginoutBtn />
+            <Navigation />
             {children}
           </PersistGate>
         </Provider>

@@ -8,8 +8,6 @@ import { selectOptionInstructor, selectOptiontime } from "../../options/option";
 import { edit } from "../../store/bookingSlice";
 import toast from "react-hot-toast";
 import React from "react";
-import uuid from "react-uuid";
-import Link from "next/link";
 
 type Props = {
   params: {
@@ -101,7 +99,6 @@ export default function Edit({ params }: Props) {
 
   return (
     <div>
-      <Link href="/list">예약 리스트 페이지로 이동하기</Link>
       <form onSubmit={onSubmit}>
         <label>
           예약날짜 : {currentDate}
