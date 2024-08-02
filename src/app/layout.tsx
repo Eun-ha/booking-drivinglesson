@@ -24,7 +24,6 @@ export default function RootLayout({
         <Provider store={store}>
           <PersistGate loading={null} persistor={persistor}>
             <Toaster position="bottom-center" reverseOrder={true} />
-            <LoginoutBtn />
             <Navigation />
             {children}
           </PersistGate>
