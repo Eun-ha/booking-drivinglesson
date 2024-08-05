@@ -1,4 +1,4 @@
-import { useAppDispatch } from "../store/store";
+import { useAppDispatch } from "../app/store/store";
 
 const Counter = ({ number, type, type2 }) => {
   const dispatch = useAppDispatch();

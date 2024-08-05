@@ -1,7 +1,7 @@
 "use client";
 
-import { useAppDispatch } from "../store/store";
-import { remove } from "../store/bookingSlice";
+import { useAppDispatch } from "../app/store/store";
+import { remove } from "../app/store/bookingSlice";
 import toast from "react-hot-toast";
 
 export default function DeleteBtn(id: { id: string }) {

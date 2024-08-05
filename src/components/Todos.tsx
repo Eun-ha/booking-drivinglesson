@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch } from "../store/store";
-import { changeInput, insert } from "../store/todoSlice";
+import { useAppDispatch } from "../app/store/store";
+import { changeInput, insert } from "../app/store/todoSlice";
 import TodoItem from "./TodoItem";
 
 const Todos = ({ input, todos }) => {

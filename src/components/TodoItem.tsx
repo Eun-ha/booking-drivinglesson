@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { useAppDispatch } from "../store/store";
-import { remove, toggle } from "../store/todoSlice";
+import { useAppDispatch } from "../app/store/store";
+import { remove, toggle } from "../app/store/todoSlice";
 
 const TodoItem = ({ todo }) => {
   const [id, setId] = useState();

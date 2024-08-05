@@ -6,8 +6,7 @@ import { store } from "./store/store";
 import { PersistGate } from "redux-persist/integration/react";
 import { persistStore } from "redux-persist";
 import { Toaster } from "react-hot-toast";
-import LoginoutBtn from "./components/LoginoutBtn";
-import Navigation from "./components/Navigation";
+import Navigation from "@/components/Navigation";
 
 const inter = Inter({ subsets: ["latin"] });
 
