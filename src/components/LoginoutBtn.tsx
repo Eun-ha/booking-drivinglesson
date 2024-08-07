@@ -4,6 +4,7 @@ import { login, logout, onUserStateChange } from "../firebase/firebasedb";
 import { useEffect, useState } from "react";
 
 export default function LoginoutBtn() {
+  /*
   const [user, setUser] = useState();
 
   useEffect(() => {
@@ -26,4 +27,5 @@ export default function LoginoutBtn() {
       {user && <button onClick={handleLogout}>Logout</button>}
     </div>
   );
+  */
 }

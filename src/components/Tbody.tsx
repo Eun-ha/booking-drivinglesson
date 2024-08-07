@@ -4,7 +4,7 @@ import { collection, getDocs } from "firebase/firestore";
 import { useEffect, useState } from "react";
 import fireStore from "../firebase/firestore";
 import { Info } from "../app/types/type";
-import { useAppSelector } from "../app/store/store";
+import { useAppSelector } from "../store/store";
 import DeleteBtn from "./DeleteBtn";
 import Link from "next/link";
 

@@ -36,7 +36,7 @@ export async function logout() {
   return signOut(auth).then(() => null);
 }
 
-export function onUserStateChange(callback) {
+export function onUserStateChange(callback: any) {
   onAuthStateChanged(auth, (user) => {
     callback(user);
   });

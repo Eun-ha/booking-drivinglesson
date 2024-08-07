@@ -1,14 +1,13 @@
 "use client";
-
 import { FormEvent, useEffect, useRef, useState } from "react";
 import Select from "react-select";
-import { useAppDispatch, useAppSelector } from "@/app/store/store";
+import { useAppDispatch, useAppSelector } from "@/store/store";
 import PickerDate from "@/components/PickerDate";
 import {
   selectOptionInstructor,
   selectOptiontime,
 } from "../../../options/option";
-import { edit } from "../../store/bookingSlice";
+import { edit } from "../../../store/bookingSlice";
 import toast from "react-hot-toast";
 import React from "react";
 
