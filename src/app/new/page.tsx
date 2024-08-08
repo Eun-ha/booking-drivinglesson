@@ -8,6 +8,13 @@ import { insert } from "../../store/bookingSlice";
 import toast from "react-hot-toast";
 import React from "react";
 import uuid from "react-uuid";
+import { Metadata } from "next";
+
+/*
+export const metadata: Metadata = {
+  title: "New",
+  description: "새 예약 페이지 입니다.",
+};*/
 
 export default function NewCreate() {
   const booking = useAppSelector((state) => state.booking.todos);

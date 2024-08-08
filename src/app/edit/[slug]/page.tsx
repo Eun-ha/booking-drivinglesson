@@ -10,12 +10,19 @@ import {
 import { edit } from "../../../store/bookingSlice";
 import toast from "react-hot-toast";
 import React from "react";
+import { Metadata } from "next";
 
 type Props = {
   params: {
     slug: string;
   };
 };
+
+/*
+export const metadata: Metadata = {
+  title: "Edit",
+  description: "예약 수정 페이지 입니다.",
+};*/
 
 export default function Edit({ params }: Props) {
   const booking = useAppSelector((state) => state.booking.todos);
