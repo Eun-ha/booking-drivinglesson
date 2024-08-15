@@ -6,9 +6,9 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "react-datepicker/dist/react-datepicker-cssmodules.css";
 
-interface PickerDateProps {
+type PickerDateProps = {
   handleDate: (props: Date | null | undefined) => void;
-}
+};
 export default function PickerDate({ handleDate }: PickerDateProps) {
   const [startDate, setStartDate] = useState<Date | null | undefined>(
     new Date()
