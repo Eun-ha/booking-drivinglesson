@@ -26,6 +26,26 @@ export function Form() {
   const firstSelect = useRef<any>(null);
   const secondSelect = useRef<any>(null);
 
+  const dispatch = useAppDispatch();
+
+  //PickerDate
+  const onSetDate = (props: Date | null | undefined) => {
+    const date = props;
+    const year = date?.getFullYear();
+    let month;
+
+    if (date) {
+      month = date?.getMonth() + 1;
+    } else {
+      console.log("no date");
+    }
+
+    const day = date?.getDate();
+    const newDate = `${year}-${month}-${day}`;
+    setDate(newDate);
+  };
+
+  //Commonselect
   const handleSelectedValue = (props: number | string | undefined) => {
     const selectedValue = props;
 
@@ -33,8 +53,6 @@ export function Form() {
       ? setselectedTime(selectedValue)
       : setselectedInstructor(selectedValue);
   };
-
-  const dispatch = useAppDispatch();
 
   useEffect(() => {
     setAdd({
@@ -45,19 +63,9 @@ export function Form() {
     });
   }, [id, date, selectedTime, selectedInstructor]);
 
-  async function onSubmit(event: FormEvent<HTMLFormElement>) {
+  function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    /*
-    const formData = new FormData(event.currentTarget);
-    const response = await fetch("/api/submit", {
-      method: "POST",
-      body: formData,
-    });
 
-    // Handle response if necessary
-    const data = await response.json();
-    // 
-    */
     setId(uuid());
     setAdd({
       id: id,
@@ -83,22 +91,6 @@ export function Form() {
       secondSelect.current.clearValue();
     }
   }
-
-  const onSetDate = (props: Date | null | undefined) => {
-    const date = props;
-    const year = date?.getFullYear();
-    let month;
-
-    if (date) {
-      month = date?.getMonth() + 1;
-    } else {
-      console.log("no date");
-    }
-
-    const day = date?.getDate();
-    const newDate = `${year}-${month}-${day}`;
-    setDate(newDate);
-  };
 
   console.log(booking);
 
