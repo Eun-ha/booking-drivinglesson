@@ -28,6 +28,15 @@ export function Form() {
 
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    setAdd({
+      id: uuid(),
+      date: date,
+      time: selectedTime,
+      instructor: selectedInstructor,
+    });
+  }, [id, date, selectedTime, selectedInstructor]);
+
   //PickerDate
   const onSetDate = (props: Date | null | undefined) => {
     const date = props;
@@ -53,15 +62,6 @@ export function Form() {
       ? setselectedTime(selectedValue)
       : setselectedInstructor(selectedValue);
   };
-
-  useEffect(() => {
-    setAdd({
-      id: uuid(),
-      date: date,
-      time: selectedTime,
-      instructor: selectedInstructor,
-    });
-  }, [id, date, selectedTime, selectedInstructor]);
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
