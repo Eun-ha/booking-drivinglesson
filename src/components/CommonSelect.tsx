@@ -1,38 +1,29 @@
 "use client";
 
 import React from "react";
-import { useEffect } from "react";
-import Select, { SingleValue } from "react-select";
-import { selectOptiontime } from "../options/option";
+import Select, { GroupBase, OptionsOrGroups, SingleValue } from "react-select";
+import { selectOptionInstructor, selectOptiontime } from "../options/option";
+
+type TimeType = { label: string; value: number | string };
 
 type SelectProps = {
-  handleTime: (props: number | undefined) => void;
+  type: "time" | "instructor";
   mySelectRef: any;
+  handleTime: (props: number | string | undefined) => void;
 };
 
-type OptionType = { label: string; value: number };
-
 export function CommonSelect(props: SelectProps) {
-  const { mySelectRef, handleTime } = props;
+  const { type, mySelectRef, handleTime } = props;
+  let option: OptionsOrGroups<TimeType, GroupBase<TimeType>> = type === "time"
+    ? selectOptiontime
+    : selectOptionInstructor;
 
-  useEffect(() => {
-    console.log("컴포넌트");
-    console.log("mySelectRef:", mySelectRef);
-  }, []);
-
-  const handleSelectedTime = (e: SingleValue<OptionType>) => {
-    console.log("셀렉트 반응함");
-    console.log(e?.value);
-
-    const time = e;
-    handleTime(time?.value);
+  const handleSelectedValue = (e: SingleValue<TimeType>) => {
+    const selectedValue = e;
+    handleTime(selectedValue?.value);
   };
 
   return (
-    <Select
-      options={selectOptiontime}
-      onChange={handleSelectedTime}
-      ref={mySelectRef}
-    />
+    <Select options={option} onChange={handleSelectedValue} ref={mySelectRef} />
   );
 }

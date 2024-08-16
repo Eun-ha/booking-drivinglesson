@@ -1,9 +1,7 @@
 "use client";
 import { FormEvent, useEffect, useRef, useState } from "react";
-import Select from "react-select";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import PickerDate from "@/components/PickerDate";
-import { selectOptionInstructor, selectOptiontime } from "./../options/option";
 import { insert } from "./../store/bookingSlice";
 import toast from "react-hot-toast";
 import React from "react";
@@ -18,26 +16,22 @@ export function Form() {
   const [id, setId] = useState("");
   const [date, setDate] = useState("");
 
-  const [selectedTime, setselectedTime] = useState<number>();
+  const [selectedTime, setselectedTime] = useState<
+    number | string | undefined
+  >();
+  const [selectedInstructor, setselectedInstructor] = useState<
+    number | string | undefined
+  >();
 
-  const [selectedInstructor, setselectedInstructor] = useState();
-
-  //const firstSelect = useRef<any>(null);
+  const firstSelect = useRef<any>(null);
   const secondSelect = useRef<any>(null);
 
-  const [select, setSelect] = useState<any>();
+  const handleSelectedValue = (props: number | string | undefined) => {
+    const selectedValue = props;
 
-  const handleSelectedTime = (props: number | undefined) => {
-    const time = props;
-    console.log("셀렉트 부모에게 값 전달");
-    console.log(time);
-    console.log(typeof time);
-
-    setselectedTime(time);
-  };
-
-  const handleSelectedInstructor = (e: any) => {
-    setselectedInstructor(e?.value);
+    typeof selectedValue === "number"
+      ? setselectedTime(selectedValue)
+      : setselectedInstructor(selectedValue);
   };
 
   const dispatch = useAppDispatch();
@@ -50,13 +44,6 @@ export function Form() {
       instructor: selectedInstructor,
     });
   }, [id, date, selectedTime, selectedInstructor]);
-
-  const selectRef = useRef<any>(null);
-
-  useEffect(() => {
-    console.log("부모");
-    console.log("selectRef:", selectRef);
-  });
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -91,10 +78,8 @@ export function Form() {
     dispatch(insert(add));
     toast.success("예약이 완료되었습니다.", { duration: 2000 });
 
-    if (selectRef.current || secondSelect.current) {
-      console.log(selectRef);
-      console.log("있다");
-      selectRef.current.clearValue();
+    if (firstSelect.current || secondSelect.current) {
+      firstSelect.current.clearValue();
       secondSelect.current.clearValue();
     }
   }
@@ -125,15 +110,19 @@ export function Form() {
       <br></br>
       <label>
         예약시간 :
-        <CommonSelect mySelectRef={selectRef} handleTime={handleSelectedTime} />
+        <CommonSelect
+          type="time"
+          mySelectRef={firstSelect}
+          handleTime={handleSelectedValue}
+        />
       </label>
       <br></br>
       <label>
         강사명 :
-        <Select
-          options={selectOptionInstructor}
-          onChange={handleSelectedInstructor}
-          ref={secondSelect}
+        <CommonSelect
+          type="instructor"
+          mySelectRef={secondSelect}
+          handleTime={handleSelectedValue}
         />
       </label>
       <br></br>
