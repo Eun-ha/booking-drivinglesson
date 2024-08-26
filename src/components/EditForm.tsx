@@ -88,8 +88,12 @@ export default function EditForm({ params }: Props) {
       firstSelect.current.clearValue();
       secondSelect.current.clearValue();
     }
+
+    setCurrentTime(undefined);
+    setCurrentInstructor(undefined);
   }
 
+  console.log("==최종수정 저장===");
   console.log(booking);
 
   return (
