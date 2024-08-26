@@ -14,6 +14,7 @@ type SelectProps = {
 
 export function CommonSelect(props: SelectProps) {
   const { type, mySelectRef, handleTime } = props;
+
   let option: OptionsOrGroups<TimeType, GroupBase<TimeType>> = type === "time"
     ? selectOptiontime
     : selectOptionInstructor;

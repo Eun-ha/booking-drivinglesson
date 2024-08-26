@@ -16,12 +16,12 @@ export function Form() {
   const [id, setId] = useState("");
   const [date, setDate] = useState("");
 
-  const [selectedTime, setselectedTime] = useState<
-    number | string | undefined
-  >();
+  const [selectedTime, setselectedTime] = useState<number | string | undefined>(
+    undefined
+  );
   const [selectedInstructor, setselectedInstructor] = useState<
     number | string | undefined
-  >();
+  >(undefined);
 
   const firstSelect = useRef<any>(null);
   const secondSelect = useRef<any>(null);
@@ -78,7 +78,7 @@ export function Form() {
       toast.error("예약 시간을 선택해 주세요.", { duration: 2000 });
       return;
     }
-    if (selectedInstructor === "") {
+    if (selectedInstructor === undefined) {
       toast.error("강사를 선택해 주세요.", { duration: 2000 });
       return;
     }
@@ -90,8 +90,12 @@ export function Form() {
       firstSelect.current.clearValue();
       secondSelect.current.clearValue();
     }
+
+    setselectedTime(undefined);
+    setselectedInstructor(undefined);
   }
 
+  console.log("===최종저장===");
   console.log(booking);
 
   return (
