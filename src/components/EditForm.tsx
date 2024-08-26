@@ -96,6 +96,8 @@ export default function EditForm({ params }: Props) {
   console.log("==최종수정 저장===");
   console.log(booking);
 
+  console.log("CI|CD testing");
+
   return (
     <div>
       <form onSubmit={onSubmit}>
