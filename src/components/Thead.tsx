@@ -1,6 +1,6 @@
-export default function Thead() {
-  const theadtext = ["연수날짜", "시작시간", "강사명", "연수시간"];
+import { theadtext } from "@/data/data";
 
+export default function Thead() {
   return (
     <thead>
       <tr>
