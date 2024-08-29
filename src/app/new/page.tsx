@@ -8,10 +8,5 @@ export const metadata: Metadata = {
 };
 
 export default function NewCreate() {
-  return (
-    <div>
-      <h1>새 예약 페이지 입니다.</h1>
-      <Form />
-    </div>
-  );
+  return <Form />;
 }

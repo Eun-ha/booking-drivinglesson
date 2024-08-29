@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import React from "react";
 import uuid from "react-uuid";
 import { CommonSelect } from "./CommonSelect";
+import SubmitBtn from "./SubmitBtn";
 
 export function Form() {
   const booking = useAppSelector((state) => state.booking.todos);
@@ -121,10 +122,7 @@ export function Form() {
           handleTime={handleSelectedValue}
         />
       </label>
-      <br></br>
-      <label>연수시간 : 3시간</label>
-      <br></br>
-      <button type="submit">Submit</button>
+      <SubmitBtn type="save" />
     </form>
   );
 }

@@ -6,6 +6,7 @@ import { edit } from "./../store/bookingSlice";
 import toast from "react-hot-toast";
 import React from "react";
 import { CommonSelect } from "./CommonSelect";
+import SubmitBtn from "./SubmitBtn";
 
 type Props = {
   params: {
@@ -123,10 +124,7 @@ export default function EditForm({ params }: Props) {
             handleTime={handleSelectedValue}
           />
         </label>
-        <br></br>
-        <label>연수시간 : 3시간</label>
-        <br></br>
-        <button type="submit">Update</button>
+        <SubmitBtn type="fix" />
       </form>
     </div>
   );

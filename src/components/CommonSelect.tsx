@@ -6,13 +6,13 @@ import { selectOptionInstructor, selectOptiontime } from "../options/option";
 
 type TimeType = { label: string; value: number | string };
 
-type SelectProps = {
+type SelectType = {
   type: "time" | "instructor";
   mySelectRef: any;
   handleTime: (props: number | string | undefined) => void;
 };
 
-export function CommonSelect(props: SelectProps) {
+export function CommonSelect(props: SelectType) {
   const { type, mySelectRef, handleTime } = props;
 
   let option: OptionsOrGroups<TimeType, GroupBase<TimeType>> = type === "time"
