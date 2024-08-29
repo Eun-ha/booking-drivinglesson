@@ -21,7 +21,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" className={sans.className}>
-      <body>
+      <body className="bg-indigo-500/10">
         <Providers>{children}</Providers>
       </body>
     </html>

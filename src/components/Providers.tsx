@@ -20,7 +20,7 @@ export function Providers({
         <Toaster position="bottom-center" reverseOrder={true} />
         <div className="max-w-screen-lg my-0 mx-auto">
           <Navigation />
-          {children}
+          <div className="p-5">{children}</div>
         </div>
       </PersistGate>
     </Provider>

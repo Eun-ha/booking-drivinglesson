@@ -14,10 +14,5 @@ export const metadata: Metadata = {
 };
 
 export default function Edit({ params }: Props) {
-  return (
-    <div>
-      <h1>예약 수정 페이지 입니다.</h1>
-      <EditForm params={params} />
-    </div>
-  );
+  return <EditForm params={params} />;
 }
