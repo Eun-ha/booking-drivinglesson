@@ -1,6 +1,6 @@
-import { TbHome } from "react-icons/tb";
-import { TbBrandBooking } from "react-icons/tb";
-import { TbListSearch } from "react-icons/tb";
+import BookingIcon from "@/components/icons/BookingIcon";
+import HomeIcon from "@/components/icons/HomeIcon";
+import SearchIcon from "@/components/icons/SearchIcon";
 
 type dataType = {
   link: string;
@@ -11,17 +11,17 @@ type dataType = {
 export const naviData: dataType[] = [
   {
     link: "/",
-    icon: <TbHome />,
+    icon: <HomeIcon />,
     title: "Go Home",
   },
   {
     link: "/new",
-    icon: <TbBrandBooking />,
+    icon: <BookingIcon />,
     title: "New Booking",
   },
   {
     link: "/list",
-    icon: <TbListSearch />,
+    icon: <SearchIcon />,
     title: "Go to List",
   },
 ];
@@ -30,4 +30,6 @@ export const theadtext: string[] = [
   "시작시간",
   "강사명",
   "연수시간",
+  "삭제",
+  "수정",
 ];
