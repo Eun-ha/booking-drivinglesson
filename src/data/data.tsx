@@ -30,4 +30,6 @@ export const theadtext: string[] = [
   "시작시간",
   "강사명",
   "연수시간",
+  "삭제",
+  "수정",
 ];

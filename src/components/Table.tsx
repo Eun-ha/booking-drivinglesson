@@ -3,8 +3,16 @@ import Tbody from "./Tbody";
 
 export default function Table() {
   return (
-    <table>
-      <caption>driving lesson list table</caption>
+    <table className="w-full text-center border border-indigo-500/15 ">
+      <caption className="hidden">driving lesson list table</caption>
+      <colgroup>
+        <col width="auto" />
+        <col width="20%" />
+        <col width="20%" />
+        <col width="20%" />
+        <col width="10%" />
+        <col width="10%" />
+      </colgroup>
       <Thead />
       <Tbody />
     </table>

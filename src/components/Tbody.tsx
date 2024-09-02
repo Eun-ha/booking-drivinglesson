@@ -7,6 +7,7 @@ import { Info } from "../app/types/type";
 import { useAppSelector } from "../store/store";
 import DeleteBtn from "./DeleteBtn";
 import Link from "next/link";
+import EditIcon from "./icons/EditIcon";
 
 export default function Tbody() {
   //const [list, setList] = useState<Info[]>([]);
@@ -33,7 +34,10 @@ export default function Tbody() {
   return (
     <tbody>
       {booking.map((list: Info, index) => (
-        <tr key={index}>
+        <tr
+          key={index}
+          className="border-t border-indigo-500/15 common-hover-style"
+        >
           <td>{list.date}</td>
           <td>{list.time}</td>
           <td>{list.instructor}</td>
@@ -42,7 +46,12 @@ export default function Tbody() {
             <DeleteBtn id={list.id} />
           </td>
           <td>
-            <Link href={`/edit/${list.id}`}>수정하기</Link>
+            <Link
+              href={`/edit/${list.id}`}
+              className="inline-flex p-3 common-hover-style"
+            >
+              <EditIcon />
+            </Link>
           </td>
         </tr>
       ))}

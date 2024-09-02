@@ -11,7 +11,7 @@ export default function SubmitBtn(props: SubmitType) {
     <div className="flex justify-center mt-5">
       <button
         type="submit"
-        className="flex items-center p-3 bg-indigo-500:10 hover:bg-indigo-500/15"
+        className="flex items-center p-3 common-hover-style"
       >
         <SubmitIcon />
         <span className="ml-1">
