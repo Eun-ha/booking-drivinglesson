@@ -18,10 +18,10 @@ export function Providers({
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <Toaster position="bottom-center" reverseOrder={true} />
-        <div className="max-w-screen-lg my-0 mx-auto">
+        <main className="max-w-screen-lg my-0 mx-auto">
           <Navigation />
           <div className="p-5">{children}</div>
-        </div>
+        </main>
       </PersistGate>
     </Provider>
   );
