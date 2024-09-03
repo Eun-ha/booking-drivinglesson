@@ -23,9 +23,6 @@ body {
 }
 
 @layer components {
-  .text-balance {
-    text-wrap: balance;
-  }
   .common-hover-style {
     @apply bg-indigo-500/0 hover:bg-indigo-500/15;
   }

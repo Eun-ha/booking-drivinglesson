@@ -6,7 +6,6 @@ type SubmitType = {
 };
 
 export default function SubmitBtn(props: SubmitType) {
-  console.log(props);
   return (
     <div className="flex justify-center mt-5">
       <button
