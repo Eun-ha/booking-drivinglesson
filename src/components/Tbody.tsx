@@ -7,6 +7,7 @@ import { useAppSelector } from "../store/store";
 import DeleteBtn from "./DeleteBtn";
 import Link from "next/link";
 import EditIcon from "./icons/EditIcon";
+
 import Info from "@/components/Info";
 import { InfoType } from "@/app/types/type";
 import { useTranslation } from "react-i18next";

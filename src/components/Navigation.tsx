@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+
 import BookingIcon from "@/components/icons/BookingIcon";
 import HomeIcon from "@/components/icons/HomeIcon";
 import SearchIcon from "@/components/icons/SearchIcon";
@@ -35,6 +36,7 @@ export default function Navigation() {
       title: `${t("nav-title3")}`,
     },
   ];
+
   return (
     <div className="flex justify-evenly bg-indigo-500">
       {naviData.map((data, index) => (
