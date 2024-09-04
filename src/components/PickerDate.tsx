@@ -9,6 +9,7 @@ import "react-datepicker/dist/react-datepicker-cssmodules.css";
 type PickerDateProps = {
   handleDate: (props: Date | null | undefined) => void;
 };
+
 export default function PickerDate({ handleDate }: PickerDateProps) {
   const [startDate, setStartDate] = useState<Date | null | undefined>(
     new Date()

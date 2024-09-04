@@ -1,19 +1,20 @@
 "use client";
 
+import { useTranslation } from "react-i18next";
 import CarIcon from "./icons/CarIcon";
 import CryingIcon from "./icons/CryingIcon";
 
-type SubmitType = {
+export type SubmitType = {
   type: "main" | "list";
 };
 
 export default function Info(props: SubmitType) {
+  const { t } = useTranslation();
+
   return (
     <div className="my-10 text-center">
       <p className="pb-5">
-        {props.type === "main"
-          ? "운전 연수 예약 페이지입니다!"
-          : "예약 된 연수가 없습니다."}
+        {props.type === "main" ? `${t("home-title")}` : `${t("list-no-data")}`}
       </p>
       {props.type === "main" ? <CarIcon /> : <CryingIcon />}
     </div>

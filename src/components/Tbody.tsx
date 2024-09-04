@@ -9,6 +9,7 @@ import Link from "next/link";
 import EditIcon from "./icons/EditIcon";
 import Info from "@/components/Info";
 import { InfoType } from "@/app/types/type";
+import { useTranslation } from "react-i18next";
 
 export default function Tbody() {
   //const [list, setList] = useState<InfoType[]>([]);
@@ -32,6 +33,8 @@ export default function Tbody() {
 
   const booking = useAppSelector((state) => state.booking.todos);
 
+  const { t } = useTranslation();
+
   return (
     <tbody>
       {booking.length === 0 ? (
@@ -49,7 +52,7 @@ export default function Tbody() {
             <td>{list.date}</td>
             <td>{list.time}</td>
             <td>{list.instructor}</td>
-            <td>3시간</td>
+            <td>3{t("form-title7")}</td>
             <td>
               <DeleteBtn id={list.id} />
             </td>

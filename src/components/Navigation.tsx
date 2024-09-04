@@ -1,11 +1,40 @@
 "use client";
 
-import { naviData } from "@/data/data";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
+import BookingIcon from "@/components/icons/BookingIcon";
+import HomeIcon from "@/components/icons/HomeIcon";
+import SearchIcon from "@/components/icons/SearchIcon";
+import { useTranslation } from "react-i18next";
+
+export type dataType = {
+  link: string;
+  icon: JSX.Element;
+  title: string;
+};
 
 export default function Navigation() {
   const pathName = usePathname();
+
+  const { t } = useTranslation();
+
+  const naviData: dataType[] = [
+    {
+      link: "/",
+      icon: <HomeIcon />,
+      title: `${t("nav-title1")}`,
+    },
+    {
+      link: "/new",
+      icon: <BookingIcon />,
+      title: `${t("nav-title2")}`,
+    },
+    {
+      link: "/list",
+      icon: <SearchIcon />,
+      title: `${t("nav-title3")}`,
+    },
+  ];
   return (
     <div className="flex justify-evenly bg-indigo-500">
       {naviData.map((data, index) => (

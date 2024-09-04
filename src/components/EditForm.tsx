@@ -7,6 +7,7 @@ import toast from "react-hot-toast";
 import React from "react";
 import { CommonSelect } from "./CommonSelect";
 import SubmitBtn from "./SubmitBtn";
+import { useTranslation } from "react-i18next";
 
 type Props = {
   params: {
@@ -83,7 +84,7 @@ export default function EditForm({ params }: Props) {
     });
 
     dispatch(edit(add));
-    toast.success("수정이 완료되었습니다.", { duration: 2000 });
+    toast.success(`${t("toast-text2")}`, { duration: 2000 });
 
     if (firstSelect.current || secondSelect.current) {
       firstSelect.current.clearValue();
@@ -97,18 +98,18 @@ export default function EditForm({ params }: Props) {
   console.log("==최종수정 저장===");
   console.log(booking);
 
-  console.log("CI|CD testing");
+  const { t } = useTranslation();
 
   return (
     <div>
       <form onSubmit={onSubmit}>
         <label>
-          예약날짜 : {currentDate}
+          {t("form-title1")} : {currentDate}
           <PickerDate handleDate={onSetDate} />
         </label>
         <br></br>
         <label>
-          예약시간 : {currentTime}
+          {t("form-title2")} : {currentTime}
           <CommonSelect
             type="time"
             mySelectRef={firstSelect}
@@ -117,7 +118,7 @@ export default function EditForm({ params }: Props) {
         </label>
         <br></br>
         <label>
-          강사명 :{currentInstructor}
+          {t("form-title3")} : {currentInstructor}
           <CommonSelect
             type="instructor"
             mySelectRef={secondSelect}
