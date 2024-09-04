@@ -1,4 +1,7 @@
 "use client";
+
+import { useTranslation } from "react-i18next";
+
 import SubmitIcon from "./icons/SubmitIcon";
 
 type SubmitType = {
@@ -6,7 +9,7 @@ type SubmitType = {
 };
 
 export default function SubmitBtn(props: SubmitType) {
-  console.log(props);
+  const { t } = useTranslation();
   return (
     <div className="flex justify-center mt-5">
       <button
@@ -15,7 +18,9 @@ export default function SubmitBtn(props: SubmitType) {
       >
         <SubmitIcon />
         <span className="ml-1">
-          {props.type === "save" ? "저장하기" : "수정하기"}
+          {props.type === "save"
+            ? `${t("common-text1")}`
+            : `${t("common-text2")}`}
         </span>
       </button>
     </div>

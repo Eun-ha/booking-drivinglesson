@@ -1,0 +1,21 @@
+{
+  "home-title": "Hey! welcome to driving lesson app.",
+  "nav-title1": "Go Home",
+  "nav-title2": "New Booking",
+  "nav-title3": "Go to List",
+  "list-no-data": "there is not any data.",
+  "form-title1": "Date",
+  "form-title2": "Time",
+  "form-title3": "Instructor",
+  "form-title4": "Duration",
+  "form-title5": "Delete",
+  "form-title6": "Edit",
+  "form-title7": "hours",
+  "common-text1": "Save",
+  "common-text2": "Edit",
+  "toast-text1": "The deletion is complete",
+  "toast-text2": "The modification is complete",
+  "toast-text3": "choose your time",
+  "toast-text4": "choose your Instructor",
+  "toast-text5": "The reservation is complete"
+}

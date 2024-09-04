@@ -23,9 +23,6 @@ body {
 }
 
 @layer components {
-  .text-balance {
-    text-wrap: balance;
-  }
   .common-hover-style {
     @apply bg-indigo-500/0 hover:bg-indigo-500/15;
   }
@@ -44,5 +41,6 @@ body {
   height: 38px;
   border: 1px solid rgb(204, 204, 204);
   border-radius: 4px;
+  text-indent: 8px;
   text-indent: 8px;
 }

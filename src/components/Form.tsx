@@ -8,6 +8,7 @@ import React from "react";
 import uuid from "react-uuid";
 import { CommonSelect } from "./CommonSelect";
 import SubmitBtn from "./SubmitBtn";
+import { useTranslation } from "react-i18next";
 
 export function Form() {
   const booking = useAppSelector((state) => state.booking.todos);
@@ -76,16 +77,16 @@ export function Form() {
     });
 
     if (selectedTime === undefined) {
-      toast.error("예약 시간을 선택해 주세요.", { duration: 2000 });
+      toast.error(`${t("toast-text3")}`, { duration: 2000 });
       return;
     }
     if (selectedInstructor === undefined) {
-      toast.error("강사를 선택해 주세요.", { duration: 2000 });
+      toast.error(`${t("toast-text4")}`, { duration: 2000 });
       return;
     }
 
     dispatch(insert(add));
-    toast.success("예약이 완료되었습니다.", { duration: 2000 });
+    toast.success(`${t("toast-text5")}`, { duration: 2000 });
 
     if (firstSelect.current || secondSelect.current) {
       firstSelect.current.clearValue();
@@ -99,14 +100,16 @@ export function Form() {
   console.log("===최종저장===");
   console.log(booking);
 
+  const { t } = useTranslation();
+
   return (
     <form onSubmit={onSubmit}>
       <label>
-        예약날짜 : <PickerDate handleDate={onSetDate} />
+        {t("form-title1")} : <PickerDate handleDate={onSetDate} />
       </label>
       <br></br>
       <label>
-        예약시간 :
+        {t("form-title2")} :
         <CommonSelect
           type="time"
           mySelectRef={firstSelect}
@@ -115,7 +118,7 @@ export function Form() {
       </label>
       <br></br>
       <label>
-        강사명 :
+        {t("form-title3")} :
         <CommonSelect
           type="instructor"
           mySelectRef={secondSelect}

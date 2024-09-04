@@ -1,4 +1,4 @@
-export type Info = {
+export type InfoType = {
   id: string;
   date: string;
   time: number;
