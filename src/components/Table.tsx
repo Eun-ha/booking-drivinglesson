@@ -11,7 +11,7 @@ export default function Table() {
         <col width="20%" />
         <col width="20%" />
         <col width="10%" />
-        <col width="7%" />
+        <col width="10%" />
       </colgroup>
       <Thead />
       <Tbody />
