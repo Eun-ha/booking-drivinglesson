@@ -3,6 +3,7 @@
 import { useTranslation } from "react-i18next";
 import CarIcon from "./icons/CarIcon";
 import CryingIcon from "./icons/CryingIcon";
+
 import Transition from "./Transition";
 
 export type Props = {
