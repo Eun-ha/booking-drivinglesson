@@ -4,12 +4,14 @@ import { useTranslation } from "react-i18next";
 
 import SubmitIcon from "./icons/SubmitIcon";
 
-type SubmitType = {
+type Props = {
   type: "save" | "fix";
 };
 
-export default function SubmitBtn(props: SubmitType) {
+export default function SubmitBtn(props: Props) {
   const { t } = useTranslation();
+  const { type } = props;
+
   return (
     <div className="flex justify-center mt-5">
       <button
@@ -18,9 +20,7 @@ export default function SubmitBtn(props: SubmitType) {
       >
         <SubmitIcon />
         <span className="ml-1">
-          {props.type === "save"
-            ? `${t("common-text1")}`
-            : `${t("common-text2")}`}
+          {type === "save" ? `${t("common-text1")}` : `${t("common-text2")}`}
         </span>
       </button>
     </div>

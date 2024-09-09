@@ -6,7 +6,7 @@ import { persistStore } from "redux-persist";
 import { Toaster } from "react-hot-toast";
 import Navigation from "@/components/Navigation";
 import { store } from "@/store/store";
-import { I18nextProvider, useTranslation } from "react-i18next";
+import { I18nextProvider } from "react-i18next";
 import i18n from "@/locales/i18n";
 import ChangeLang from "./ChangeLang";
 

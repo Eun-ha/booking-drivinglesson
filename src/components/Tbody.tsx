@@ -37,7 +37,7 @@ export default function Tbody() {
   const { t } = useTranslation();
 
   return (
-    <tbody>
+    <tbody className="text-sm">
       {booking.length === 0 ? (
         <tr>
           <td colSpan={6}>

@@ -22,7 +22,7 @@ export default function EditForm({ params }: Props) {
   const { id, date, time, instructor } = current!;
 
   const [add, setAdd] = useState({});
-  const [currentDate, setCurrentDate] = useState("");
+  const [currentDate, setCurrentDate] = useState<string>();
   const [currentTime, setCurrentTime] = useState<number | string | undefined>();
   const [currentInstructor, setCurrentInstructor] = useState<
     number | string | undefined
@@ -93,6 +93,7 @@ export default function EditForm({ params }: Props) {
 
     setCurrentTime(undefined);
     setCurrentInstructor(undefined);
+    setCurrentDate(undefined);
   }
 
   console.log("==최종수정 저장===");

@@ -4,8 +4,10 @@
   "nav-title2": "새 예약",
   "nav-title3": "내역으로",
   "list-no-data": "예약 된 연수가 없습니다.",
-  "form-title1": "예약날짜",
-  "form-title2": "예약시간",
+
+  "form-title1": "날짜",
+  "form-title2": "시간",
+
   "form-title3": "강사명",
   "form-title4": "소요시간",
   "form-title5": "삭제",
