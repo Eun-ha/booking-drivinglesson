@@ -4,11 +4,11 @@ import { useTranslation } from "react-i18next";
 
 import SubmitIcon from "./icons/SubmitIcon";
 
-type SubmitType = {
+type Props = {
   type: "save" | "fix";
 };
 
-export default function SubmitBtn(props: SubmitType) {
+export default function SubmitBtn(props: Props) {
   const { t } = useTranslation();
   return (
     <div className="flex justify-center mt-5">
