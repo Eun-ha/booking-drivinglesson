@@ -26,8 +26,8 @@ export const naviData: dataType[] = [
   },
 ];
 export const theadtext: string[] = [
-  "연수날짜",
-  "시작시간",
+  "날짜",
+  "시간",
   "강사명",
   "연수시간",
   "삭제",

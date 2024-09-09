@@ -15,7 +15,7 @@ export default function Info(props: Props) {
 
   return (
     <div className="my-10 text-center">
-      <p className="pb-2">
+      <p className="pb-3">
         {type === "main" ? (
           <Transition type="base">{t("home-title")}</Transition>
         ) : (
