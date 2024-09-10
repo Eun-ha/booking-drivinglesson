@@ -9,12 +9,6 @@ import { CommonSelect } from "./CommonSelect";
 import SubmitBtn from "./SubmitBtn";
 import { useTranslation } from "react-i18next";
 
-type Props = {
-  params: {
-    slug: string;
-  };
-};
-
 export default function EditForm(props: { currentId: string }) {
   const booking = useAppSelector((state) => state.booking.todos);
   const current = booking.find(({ id }) => id === props.currentId);
