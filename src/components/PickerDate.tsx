@@ -29,7 +29,7 @@ export default function PickerDate({ handleDate }: Props) {
         selected={startDate}
         onChange={(date) => setStartDate(date)}
         onSelect={handleClick}
-        disabledKeyboardNavigation={false}
+        disabledKeyboardNavigation
       />
     </div>
   );
