@@ -16,7 +16,7 @@ export function Form() {
   const [add, setAdd] = useState({});
 
   const [id, setId] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState<string | undefined>();
 
   const [selectedTime, setselectedTime] = useState<number | string | undefined>(
     undefined
@@ -29,6 +29,8 @@ export function Form() {
   const secondSelect = useRef<any>(null);
 
   const dispatch = useAppDispatch();
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     setAdd({
@@ -69,6 +71,7 @@ export function Form() {
     event.preventDefault();
 
     setId(uuid());
+
     setAdd({
       id: id,
       date: date,
@@ -97,10 +100,8 @@ export function Form() {
     setselectedInstructor(undefined);
   }
 
-  console.log("===최종저장===");
-  console.log(booking);
-
-  const { t } = useTranslation();
+  //console.log("===최종저장===");
+  //console.log(booking);
 
   return (
     <form onSubmit={onSubmit}>

@@ -44,3 +44,9 @@ body {
   text-indent: 8px;
   text-indent: 8px;
 }
+
+.react-datepicker-wrapper
+  .react-datepicker__input-container
+  .react-datepicker__close-icon::after {
+  background-color: rgb(99 102 241);
+}
