@@ -25,6 +25,11 @@ export function CommonSelect(props: Props) {
   };
 
   return (
-    <Select options={option} onChange={handleSelectedValue} ref={mySelectRef} />
+    <Select
+      options={option}
+      onChange={handleSelectedValue}
+      ref={mySelectRef}
+      isSearchable={false}
+    />
   );
 }
