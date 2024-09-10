@@ -15,9 +15,9 @@ type Props = {
   };
 };
 
-export default function EditForm({ params }: Props) {
+export default function EditForm(props: { currentId: string }) {
   const booking = useAppSelector((state) => state.booking.todos);
-  const current = booking.find(({ id }) => id === params.slug);
+  const current = booking.find(({ id }) => id === props.currentId);
 
   const { id, date, time, instructor } = current!;
 
