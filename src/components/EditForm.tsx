@@ -99,8 +99,9 @@ export default function EditForm(props: Props) {
   const { t } = useTranslation();
 
   return (
+
     <div className="bg-white mx-5 my-[48px] px-5 py-[30px] rounded">
-      <form onSubmit={onSubmit}>
+       <form onSubmit={onSubmit}>
         <label>
           {t("form-title1")} : {currentDate}
           <PickerDate handleDate={onSetDate} />
