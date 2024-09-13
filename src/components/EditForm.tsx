@@ -9,7 +9,11 @@ import { CommonSelect } from "./CommonSelect";
 import SubmitBtn from "./SubmitBtn";
 import { useTranslation } from "react-i18next";
 
-export default function EditForm(props: { currentId: string }) {
+type Props = {
+  currentId: string;
+};
+
+export default function EditForm(props: Props) {
   const booking = useAppSelector((state) => state.booking.todos);
   const current = booking.find(({ id }) => id === props.currentId);
 
@@ -87,16 +91,15 @@ export default function EditForm(props: { currentId: string }) {
 
     setCurrentTime(undefined);
     setCurrentInstructor(undefined);
-    setCurrentDate(undefined);
   }
 
-  console.log("==최종수정 저장===");
-  console.log(booking);
+  //console.log("==최종수정 저장===");
+  //console.log(booking);
 
   const { t } = useTranslation();
 
   return (
-    <div>
+    <div className="bg-white m-[50px] px-[20px] py-[30px] rounded">
       <form onSubmit={onSubmit}>
         <label>
           {t("form-title1")} : {currentDate}
