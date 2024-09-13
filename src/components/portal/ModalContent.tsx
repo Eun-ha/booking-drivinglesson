@@ -1,0 +1,24 @@
+import { InfoType } from "@/app/types/type";
+import EditForm from "../EditForm";
+import CloseIcon from "../icons/CloseIcon";
+
+type Props = {
+  item: InfoType;
+  onClose: () => void;
+};
+
+export default function ModalContent(props: Props) {
+  //console.log("modal======");
+  //console.log(props);
+  return (
+    <div className="modal w-full h-full fixed top-0 left-0 z-50 bg-neutral-900/70">
+      <EditForm currentId={props.item.id} />
+      <button
+        className="absolute top-[20px] right-[45px]"
+        onClick={props.onClose}
+      >
+        <CloseIcon />
+      </button>
+    </div>
+  );
+}

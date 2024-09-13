@@ -11,6 +11,7 @@ import EditIcon from "./icons/EditIcon";
 import Info from "@/components/Info";
 import { InfoType } from "@/app/types/type";
 import { useTranslation } from "react-i18next";
+import Portal from "./portal/Portal";
 
 export default function Tbody() {
   //const [list, setList] = useState<InfoType[]>([]);
@@ -58,12 +59,7 @@ export default function Tbody() {
               <DeleteBtn id={list.id} />
             </td>
             <td>
-              <Link
-                href={`/edit/${list.id}`}
-                className="inline-flex p-3 common-hover-style"
-              >
-                <EditIcon />
-              </Link>
+              <Portal item={list} />
             </td>
           </tr>
         ))

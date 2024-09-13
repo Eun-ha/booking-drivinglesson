@@ -14,5 +14,5 @@ export const metadata: Metadata = {
 };
 
 export default function Edit({ params }: Props) {
-  return <EditForm params={params} />;
+  return <div>test</div>;
 }

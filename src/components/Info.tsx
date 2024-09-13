@@ -16,13 +16,13 @@ export default function Info(props: Props) {
 
   return (
     <div className="my-10 text-center">
-      <p className="pb-3">
+      <div className="pb-3">
         {type === "main" ? (
           <Transition type="base">{t("home-title")}</Transition>
         ) : (
           `${t("list-no-data")}`
         )}
-      </p>
+      </div>
 
       {type === "main" ? (
         <Transition type="bounce">

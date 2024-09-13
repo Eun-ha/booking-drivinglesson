@@ -10,14 +10,12 @@ import SubmitBtn from "./SubmitBtn";
 import { useTranslation } from "react-i18next";
 
 type Props = {
-  params: {
-    slug: string;
-  };
+  currentId: string;
 };
 
-export default function EditForm({ params }: Props) {
+export default function EditForm(props: Props) {
   const booking = useAppSelector((state) => state.booking.todos);
-  const current = booking.find(({ id }) => id === params.slug);
+  const current = booking.find(({ id }) => id === props.currentId);
 
   const { id, date, time, instructor } = current!;
 
@@ -93,16 +91,15 @@ export default function EditForm({ params }: Props) {
 
     setCurrentTime(undefined);
     setCurrentInstructor(undefined);
-    setCurrentDate(undefined);
   }
 
-  console.log("==최종수정 저장===");
-  console.log(booking);
+  //console.log("==최종수정 저장===");
+  //console.log(booking);
 
   const { t } = useTranslation();
 
   return (
-    <div>
+    <div className="bg-white m-[50px] px-[20px] py-[30px] rounded">
       <form onSubmit={onSubmit}>
         <label>
           {t("form-title1")} : {currentDate}
