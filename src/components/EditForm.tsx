@@ -20,7 +20,8 @@ export default function EditForm(props: Props) {
   const { id, date, time, instructor } = current!;
 
   const [add, setAdd] = useState({});
-  const [currentDate, setCurrentDate] = useState<string>();
+  const [originDate, setOriginDate] = useState<string | undefined>();
+  const [currentDate, setCurrentDate] = useState<string | undefined>();
   const [currentTime, setCurrentTime] = useState<number | string | undefined>();
   const [currentInstructor, setCurrentInstructor] = useState<
     number | string | undefined
@@ -31,7 +32,10 @@ export default function EditForm(props: Props) {
 
   const dispatch = useAppDispatch();
 
+  const { t } = useTranslation();
+
   useEffect(() => {
+    setOriginDate(date);
     setCurrentDate(date);
     setCurrentTime(time);
     setCurrentInstructor(instructor);
@@ -47,19 +51,19 @@ export default function EditForm(props: Props) {
   }, [currentDate, currentTime, currentInstructor]);
 
   const onSetDate = (props: Date | null | undefined) => {
-    const date = props;
-    const year = date?.getFullYear();
+    const pickerDate = props;
     let month;
+    const year = pickerDate?.getFullYear();
+    const day = pickerDate?.getDate();
 
-    if (date) {
-      month = date?.getMonth() + 1;
+    if (pickerDate) {
+      month = pickerDate?.getMonth() + 1;
+      const newDate = `${year}-${month}-${day}`;
+      setCurrentDate(newDate);
     } else {
-      console.log("no date");
+      console.log("no date on datepicker of editform");
+      setCurrentDate("");
     }
-
-    const day = date?.getDate();
-    const newDate = `${year}-${month}-${day}`;
-    setCurrentDate(newDate);
   };
 
   //Commonselect
@@ -82,7 +86,6 @@ export default function EditForm(props: Props) {
     });
 
     dispatch(edit(add));
-    toast.success(`${t("toast-text2")}`, { duration: 2000 });
 
     if (firstSelect.current || secondSelect.current) {
       firstSelect.current.clearValue();
@@ -91,17 +94,26 @@ export default function EditForm(props: Props) {
 
     setCurrentTime(undefined);
     setCurrentInstructor(undefined);
+
+    if (originDate === currentDate) {
+      setCurrentDate("");
+    }
+
+    const closeIcon: HTMLElement | null = document.querySelector(
+      ".react-datepicker__close-icon"
+    );
+    if (closeIcon) {
+      closeIcon.click(); //datepicker delete button click trigger to reset datepicker input
+    }
+    toast.success(`${t("toast-text2")}`, { duration: 2000 });
   }
 
-  //console.log("==최종수정 저장===");
+  //console.log("==EditForm 최종 수정 저장===");
   //console.log(booking);
 
-  const { t } = useTranslation();
-
   return (
-
     <div className="bg-white mx-5 my-[48px] px-5 py-[30px] rounded">
-       <form onSubmit={onSubmit}>
+      <form onSubmit={onSubmit}>
         <label>
           {t("form-title1")} : {currentDate}
           <PickerDate handleDate={onSetDate} />
