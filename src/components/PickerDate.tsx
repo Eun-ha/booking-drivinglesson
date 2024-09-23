@@ -11,9 +11,7 @@ type Props = {
 };
 
 export default function PickerDate({ handleDate }: Props) {
-  const [startDate, setStartDate] = useState<Date | null | undefined>(
-    new Date()
-  );
+  const [startDate, setStartDate] = useState<Date | null | undefined>();
 
   useEffect(() => {
     handleClick();
@@ -29,7 +27,9 @@ export default function PickerDate({ handleDate }: Props) {
         selected={startDate}
         onChange={(date) => setStartDate(date)}
         onSelect={handleClick}
-        disabledKeyboardNavigation
+        isClearable
+        placeholderText="Click to select a date"
+        onFocus={(e) => e.target.blur()}
       />
     </div>
   );

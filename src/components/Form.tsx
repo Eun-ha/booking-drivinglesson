@@ -43,19 +43,18 @@ export function Form() {
 
   //PickerDate
   const onSetDate = (props: Date | null | undefined) => {
-    const date = props;
-    const year = date?.getFullYear();
+    const pickerDate = props;
+    const year = pickerDate?.getFullYear();
+    const day = pickerDate?.getDate();
     let month;
 
-    if (date) {
-      month = date?.getMonth() + 1;
+    if (pickerDate) {
+      month = pickerDate?.getMonth() + 1;
+      const newDate = `${year}-${month}-${day}`;
+      setDate(newDate);
     } else {
-      console.log("no date");
+      console.log("no date on datepicker of form");
     }
-
-    const day = date?.getDate();
-    const newDate = `${year}-${month}-${day}`;
-    setDate(newDate);
   };
 
   //Commonselect
@@ -96,11 +95,19 @@ export function Form() {
       secondSelect.current.clearValue();
     }
 
+    const closeIcon: HTMLElement | null = document.querySelector(
+      ".react-datepicker__close-icon"
+    );
+
+    if (closeIcon) {
+      closeIcon.click();
+    }
+
     setselectedTime(undefined);
     setselectedInstructor(undefined);
   }
 
-  //console.log("===최종저장===");
+  //console.log("===Form 최종 수정 저장===");
   //console.log(booking);
 
   return (
