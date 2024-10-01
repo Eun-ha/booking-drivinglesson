@@ -4,10 +4,13 @@ import { useAppDispatch } from "../store/store";
 import { remove } from "../store/bookingSlice";
 import toast from "react-hot-toast";
 import DeleteIcon from "./icons/DeleteIcon copy";
-
 import { useTranslation } from "react-i18next";
 
-export default function DeleteBtn(id: { id: string }) {
+type Props = {
+  id: string;
+};
+
+export default function DeleteBtn(id: Props) {
   const currentId = id;
   const dispatch = useAppDispatch();
   const { t } = useTranslation();

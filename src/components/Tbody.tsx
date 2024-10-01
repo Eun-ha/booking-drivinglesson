@@ -13,7 +13,18 @@ import { InfoType } from "@/app/types/type";
 import { useTranslation } from "react-i18next";
 import Portal from "./portal/Portal";
 
-export default function Tbody() {
+type Props = {
+  bookingdata: InfoType[];
+};
+
+export default function Tbody(bookingdata: Props) {
+  console.log("========booking value");
+  console.log(typeof bookingdata);
+  console.log(bookingdata);
+
+  //console.log(booking);
+  //const booking = useAppSelector((state) => state.booking.todos);
+
   //const [list, setList] = useState<InfoType[]>([]);
 
   /*
@@ -33,20 +44,23 @@ export default function Tbody() {
     setList(arr);
   };*/
 
-  const booking = useAppSelector((state) => state.booking.todos);
+  //const booking = useAppSelector((state) => state.booking.todos);
+
+  //console.log("=========tbody");
+  //console.log(booking);
 
   const { t } = useTranslation();
 
   return (
     <tbody className="text-sm">
-      {booking.length === 0 ? (
+      {bookingdata.bookingdata.length === 0 ? (
         <tr>
           <td colSpan={6}>
             <Info type="list" />
           </td>
         </tr>
       ) : (
-        booking.map((list: InfoType, index) => (
+        bookingdata.bookingdata.map((list, index) => (
           <tr
             key={index}
             className="border-t border-indigo-500/15 common-hover-style"

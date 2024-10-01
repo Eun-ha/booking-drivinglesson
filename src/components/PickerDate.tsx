@@ -29,7 +29,9 @@ export default function PickerDate({ handleDate }: Props) {
         onSelect={handleClick}
         isClearable
         placeholderText="Click to select a date"
-        onFocus={(e) => e.target.blur()}
+        onKeyDown={(e: React.KeyboardEvent<HTMLElement>) => {
+          e.preventDefault();
+        }}
       />
     </div>
   );
