@@ -9,7 +9,7 @@ import { InfoType } from "@/app/types/type";
 export default function Table() {
   const booking: InfoType[] = useAppSelector((state) => state.booking.todos);
   const [filterdata, setFilterData] = useState<InfoType[]>(booking);
-  const [target, setTarget] = useState<number | string | undefined>("All");
+  const [target, setTarget] = useState<number | string | undefined>();
 
   const handleFilterData = (props: any) => {
     let value;
