@@ -7,31 +7,25 @@ import { useEffect, useState } from "react";
 import { InfoType } from "@/app/types/type";
 
 export default function Table() {
-  const booking = useAppSelector((state) => state.booking.todos);
-  const [filterdata, setFilterData] = useState(booking);
-  const [target, setTarget] = useState("All");
+  const booking: InfoType[] = useAppSelector((state) => state.booking.todos);
+  const [filterdata, setFilterData] = useState<InfoType[]>(booking);
+  const [target, setTarget] = useState<number | string | undefined>("All");
 
   const handleFilterData = (props: any) => {
-    //console.log(typeof props);
-    //setTarget(props);
+    let value;
+    props != "All" ? (value = Number(props)) : (value = "All");
+    setTarget(value);
   };
 
   useEffect(() => {
     setFilterData(booking);
-  }, [booking]);
-
-  /*
-  useEffect(() => {
-    const value = filterdata.filter((data) => data.time === target);
-    setFilterData(value);
-  }, [target]);
-
-  console.log("========target value");
-  console.log(target);
-
-  console.log("========sorteddata value");
-  console.log(filterdata);
-  */
+    if (target === "All") {
+      setFilterData(booking);
+    } else {
+      let data = booking.filter((data) => data.time === target);
+      setFilterData(data);
+    }
+  }, [booking, target]);
 
   return (
     <div>

@@ -18,10 +18,6 @@ type Props = {
 };
 
 export default function Tbody(bookingdata: Props) {
-  console.log("========booking value");
-  console.log(typeof bookingdata);
-  console.log(bookingdata);
-
   //console.log(booking);
   //const booking = useAppSelector((state) => state.booking.todos);
 
