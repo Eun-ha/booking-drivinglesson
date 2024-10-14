@@ -1,35 +1,41 @@
 "use client";
 
-import { InfoType } from "@/app/types/type";
 import RadioBtn from "@/components/RadioBtn";
 import RadioGroup from "@/components/RadioGroup";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 
 type Props = {
+  type: "time" | "instructor";
   handleData: Dispatch<SetStateAction<{}>>;
 };
 
-export default function Radio({ handleData }: Props) {
-  const [value, setValue] = useState("All");
+export default function Radio(props: Props) {
+  const { type, handleData } = props;
+  const [time, setTime] = useState("All");
+  const [instructor, setInstructor] = useState("All");
+
+  const timeArray = ["All", "9", "12", "3", "6"];
+  const instructorArray = ["All", "홍길동", "고영희", "김철수"];
+
+  let data = type === "time" ? timeArray : instructorArray;
 
   useEffect(() => {
-    handleData(value);
-  }, [value]);
+    type === "time" ? handleData(time) : handleData(instructor);
+  }, [time, instructor]);
 
   return (
     <div>
       <RadioGroup
-        label="필터링 할 시간을 선택하는 라디오 버튼 입니다."
-        value={value}
-        onChange={setValue}
+        label={type === "time" ? "연수시간" : "연수강사"}
+        value={type === "time" ? time : instructor}
+        onChange={type === "time" ? setTime : setInstructor}
       >
-        <RadioBtn value="All">All</RadioBtn>
-        <RadioBtn value="9">9</RadioBtn>
-        <RadioBtn value="12">12</RadioBtn>
-        <RadioBtn value="3">3</RadioBtn>
-        <RadioBtn value="6">6</RadioBtn>
+        {data.map((data, index) => (
+          <RadioBtn key={index} value={data}>
+            {data}
+          </RadioBtn>
+        ))}
       </RadioGroup>
-      <p>{value} 타임을 선택하셨습니다.</p>
     </div>
   );
 }

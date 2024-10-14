@@ -10,26 +10,44 @@ export default function Table() {
   const booking: InfoType[] = useAppSelector((state) => state.booking.todos);
   const [filterdata, setFilterData] = useState<InfoType[]>(booking);
   const [target, setTarget] = useState<number | string | undefined>();
+  const [selectedInstructor, setSelectedInstructor] = useState<
+    string | undefined
+  >();
 
-  const handleFilterData = (props: any) => {
+  const handleFilterTime = (props: any) => {
     let value;
     props != "All" ? (value = Number(props)) : (value = "All");
     setTarget(value);
   };
 
+  const handleFilterInstructor = (props: any) => {
+    const value = props;
+    setSelectedInstructor(value);
+  };
+
   useEffect(() => {
-    setFilterData(booking);
-    if (target === "All") {
-      setFilterData(booking);
+    let temp: InfoType[] = [];
+    if (target !== "All") {
+      temp = booking.filter((data) => {
+        return data.time === target;
+      });
     } else {
-      let data = booking.filter((data) => data.time === target);
-      setFilterData(data);
+      temp = booking;
     }
-  }, [booking, target]);
+    if (selectedInstructor !== "All") {
+      let temp2 = temp.filter((data) => data.instructor === selectedInstructor);
+      setFilterData(temp2);
+    } else {
+      setFilterData(temp);
+    }
+  }, [booking, target, selectedInstructor]);
 
   return (
-    <div>
-      <Radio handleData={handleFilterData} />
+    <div className="lg:flex">
+      <div className="border border-indigo-500/15">
+        <Radio type="time" handleData={handleFilterTime} />
+        <Radio type="instructor" handleData={handleFilterInstructor} />
+      </div>
       <table className="w-full text-center border border-indigo-500/15 ">
         <caption className="hidden">driving lesson list table</caption>
         <colgroup>
