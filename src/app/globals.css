@@ -50,3 +50,8 @@ body {
   .react-datepicker__close-icon::after {
   background-color: rgb(99 102 241);
 }
+
+input,
+progress {
+  accent-color: rgb(99 102 241);
+}

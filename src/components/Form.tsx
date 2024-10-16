@@ -1,6 +1,6 @@
 "use client";
 import { FormEvent, useEffect, useRef, useState } from "react";
-import { useAppDispatch, useAppSelector } from "@/store/store";
+import { useAppDispatch } from "@/store/store";
 import PickerDate from "@/components/PickerDate";
 import { insert } from "./../store/bookingSlice";
 import toast from "react-hot-toast";
@@ -11,8 +11,6 @@ import SubmitBtn from "./SubmitBtn";
 import { useTranslation } from "react-i18next";
 
 export function Form() {
-  const booking = useAppSelector((state) => state.booking.todos);
-
   const [add, setAdd] = useState({});
 
   const [id, setId] = useState("");
@@ -106,9 +104,6 @@ export function Form() {
     setselectedTime(undefined);
     setselectedInstructor(undefined);
   }
-
-  //console.log("===Form 최종 수정 저장===");
-  //console.log(booking);
 
   return (
     <form onSubmit={onSubmit}>

@@ -99,17 +99,16 @@ export default function EditForm(props: Props) {
       setCurrentDate("");
     }
 
-    const closeIcon: HTMLElement | null = document.querySelector(
-      ".react-datepicker__close-icon"
-    );
-    if (closeIcon) {
-      closeIcon.click(); //datepicker delete button click trigger to reset datepicker input
+    const modalCloseBtn: HTMLElement | null =
+      document.querySelector(".modalCloseBtn");
+    if (modalCloseBtn) {
+      modalCloseBtn.click(); //datepicker delete button click trigger to reset datepicker input
     }
     toast.success(`${t("toast-text2")}`, { duration: 2000 });
   }
 
-  //console.log("==EditForm 최종 수정 저장===");
-  //console.log(booking);
+  console.log("==EditForm 최종 수정 저장===");
+  console.log(booking);
 
   return (
     <div className="bg-white mx-5 my-[48px] px-5 py-[30px] rounded">
