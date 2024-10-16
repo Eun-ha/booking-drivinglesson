@@ -17,7 +17,9 @@ type Props = Rest & {
 export default function RadioGroup({ label, children, ...rest }: Props) {
   return (
     <fieldset>
-      <legend>{label}</legend>
+      <legend className="w-full p-3 border-b bg-indigo-500/15 font-bold text-sm">
+        {label}
+      </legend>
       <RadioContext.Provider value={rest}>{children}</RadioContext.Provider>
     </fieldset>
   );

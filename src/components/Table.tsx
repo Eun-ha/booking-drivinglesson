@@ -43,8 +43,8 @@ export default function Table() {
   }, [booking, target, selectedInstructor]);
 
   return (
-    <div className="lg:flex">
-      <div className="border border-indigo-500/15">
+    <div className="lg:flex lg:items-start">
+      <div className="mb-[15px] lg:mb-0 lg:mr-[10px] border border-indigo-500/15">
         <Radio type="time" handleData={handleFilterTime} />
         <Radio type="instructor" handleData={handleFilterInstructor} />
       </div>

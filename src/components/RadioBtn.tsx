@@ -12,14 +12,14 @@ export default function RadioBtn({ children, value }: Props) {
   const group = useContext(RadioContext);
 
   return (
-    <label>
+    <label className="inline-block p-2">
       <input
         type="radio"
         value={value}
         checked={group.value !== undefined ? value === group.value : undefined}
         onChange={(e) => group.onChange && group.onChange(e.target.value)}
       />
-      {children}
+      <span className="pl-[2px]">{children}</span>
     </label>
   );
 }
