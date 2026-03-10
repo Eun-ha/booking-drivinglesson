@@ -1,12 +1,6 @@
 "use client";
 
-import { collection, getDocs } from "firebase/firestore";
-import { useEffect, useState } from "react";
-import fireStore from "../firebase/firestore";
-import { useAppSelector } from "../store/store";
 import DeleteBtn from "./DeleteBtn";
-import Link from "next/link";
-import EditIcon from "./icons/EditIcon";
 
 import Info from "@/components/Info";
 import { InfoType } from "@/app/types/type";
