@@ -19,7 +19,6 @@ export default function EditForm(props: Props) {
 
   const { id, date, time, instructor } = current!;
 
-  const [add, setAdd] = useState({});
   const [originDate, setOriginDate] = useState<string | undefined>();
   const [currentDate, setCurrentDate] = useState<string | undefined>();
   const [currentTime, setCurrentTime] = useState<number | string | undefined>();
@@ -40,15 +39,6 @@ export default function EditForm(props: Props) {
     setCurrentTime(time);
     setCurrentInstructor(instructor);
   }, []);
-
-  useEffect(() => {
-    setAdd({
-      id,
-      date: currentDate,
-      time: currentTime,
-      instructor: currentInstructor,
-    });
-  }, [currentDate, currentTime, currentInstructor]);
 
   const onSetDate = (props: Date | null | undefined) => {
     const pickerDate = props;
@@ -78,14 +68,14 @@ export default function EditForm(props: Props) {
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    setAdd({
+    const payload = {
       id,
       date: currentDate,
       time: currentTime,
       instructor: currentInstructor,
-    });
+    };
 
-    dispatch(edit(add));
+    dispatch(edit(payload));
 
     if (firstSelect.current || secondSelect.current) {
       firstSelect.current.clearValue();

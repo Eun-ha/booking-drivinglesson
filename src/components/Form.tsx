@@ -1,5 +1,5 @@
 "use client";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useRef, useState } from "react";
 import { useAppDispatch } from "@/store/store";
 import PickerDate from "@/components/PickerDate";
 import { insert } from "./../store/bookingSlice";
@@ -11,9 +11,6 @@ import SubmitBtn from "./SubmitBtn";
 import { useTranslation } from "react-i18next";
 
 export function Form() {
-  const [add, setAdd] = useState({});
-
-  const [id, setId] = useState("");
   const [date, setDate] = useState<string | undefined>();
 
   const [selectedTime, setselectedTime] = useState<number | string | undefined>(
@@ -29,15 +26,6 @@ export function Form() {
   const dispatch = useAppDispatch();
 
   const { t } = useTranslation();
-
-  useEffect(() => {
-    setAdd({
-      id: uuid(),
-      date: date,
-      time: selectedTime,
-      instructor: selectedInstructor,
-    });
-  }, [id, date, selectedTime, selectedInstructor]);
 
   //PickerDate
   const onSetDate = (props: Date | null | undefined) => {
@@ -67,14 +55,12 @@ export function Form() {
   function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
-    setId(uuid());
-
-    setAdd({
-      id: id,
+    const payload = {
+      id: uuid(),
       date: date,
       time: selectedTime,
       instructor: selectedInstructor,
-    });
+    };
 
     if (selectedTime === undefined) {
       toast.error(`${t("toast-text3")}`, { duration: 2000 });
@@ -85,7 +71,7 @@ export function Form() {
       return;
     }
 
-    dispatch(insert(add));
+    dispatch(insert(payload));
     toast.success(`${t("toast-text5")}`, { duration: 2000 });
 
     if (firstSelect.current || secondSelect.current) {
