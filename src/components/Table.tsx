@@ -3,50 +3,34 @@ import Thead from "./Thead";
 import Tbody from "./Tbody";
 import Radio from "@/components/Radio";
 import { useAppSelector } from "@/store/store";
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import { InfoType } from "@/app/types/type";
 
 export default function Table() {
   const booking: InfoType[] = useAppSelector((state) => state.booking.todos);
-  const [filterdata, setFilterData] = useState<InfoType[]>(booking);
-  const [target, setTarget] = useState<number | string | undefined>();
-  const [selectedInstructor, setSelectedInstructor] = useState<
-    string | undefined
-  >();
+  const [selectedTime, setSelectedTime] = useState("All");
+  const [selectedInstructor, setSelectedInstructor] = useState("All");
 
-  const handleFilterTime = (props: any) => {
-    let value;
-    props != "All" ? (value = Number(props)) : (value = "All");
-    setTarget(value);
-  };
+  const filteredData = useMemo(() => {
+    const byTime =
+      selectedTime === "All"
+        ? booking
+        : booking.filter((data) => data.time === Number(selectedTime));
 
-  const handleFilterInstructor = (props: any) => {
-    const value = props;
-    setSelectedInstructor(value);
-  };
-
-  useEffect(() => {
-    let temp: InfoType[] = [];
-    if (target !== "All") {
-      temp = booking.filter((data) => {
-        return data.time === target;
-      });
-    } else {
-      temp = booking;
-    }
-    if (selectedInstructor !== "All") {
-      let temp2 = temp.filter((data) => data.instructor === selectedInstructor);
-      setFilterData(temp2);
-    } else {
-      setFilterData(temp);
-    }
-  }, [booking, target, selectedInstructor]);
+    return selectedInstructor === "All"
+      ? byTime
+      : byTime.filter((data) => data.instructor === selectedInstructor);
+  }, [booking, selectedInstructor, selectedTime]);
 
   return (
     <div className="lg:flex lg:items-start">
       <div className="mb-[15px] lg:mb-0 lg:mr-[10px] border border-indigo-500/15">
-        <Radio type="time" handleData={handleFilterTime} />
-        <Radio type="instructor" handleData={handleFilterInstructor} />
+        <Radio type="time" value={selectedTime} onChange={setSelectedTime} />
+        <Radio
+          type="instructor"
+          value={selectedInstructor}
+          onChange={setSelectedInstructor}
+        />
       </div>
       <table className="w-full text-center border border-indigo-500/15 ">
         <caption className="hidden">driving lesson list table</caption>
@@ -59,7 +43,7 @@ export default function Table() {
           <col width="10%" />
         </colgroup>
         <Thead />
-        <Tbody bookingdata={filterdata} />
+        <Tbody bookingdata={filteredData} />
       </table>
     </div>
   );
