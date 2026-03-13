@@ -1,5 +1,5 @@
 "use client";
-import { FormEvent, useEffect, useRef, useState } from "react";
+import { FormEvent, useReducer, useRef } from "react";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import PickerDate from "@/components/PickerDate";
 import { edit } from "./../store/bookingSlice";
@@ -13,18 +13,52 @@ type Props = {
   currentId: string;
 };
 
+type EditFormState = {
+  date?: string;
+  time?: number | string;
+  instructor?: number | string;
+};
+
+type EditFormAction =
+  | { type: "setDate"; payload?: string }
+  | { type: "setTime"; payload?: number | string }
+  | { type: "setInstructor"; payload?: number | string }
+  | { type: "resetAfterSubmit"; payload: { date?: string } };
+
+function editFormReducer(
+  state: EditFormState,
+  action: EditFormAction
+): EditFormState {
+  switch (action.type) {
+    case "setDate":
+      return { ...state, date: action.payload };
+    case "setTime":
+      return { ...state, time: action.payload };
+    case "setInstructor":
+      return { ...state, instructor: action.payload };
+    case "resetAfterSubmit":
+      return {
+        ...state,
+        date: action.payload.date,
+        time: undefined,
+        instructor: undefined,
+      };
+    default:
+      return state;
+  }
+}
+
 export default function EditForm(props: Props) {
   const booking = useAppSelector((state) => state.booking.todos);
   const current = booking.find(({ id }) => id === props.currentId);
 
   const { id, date, time, instructor } = current!;
 
-  const [originDate, setOriginDate] = useState<string | undefined>();
-  const [currentDate, setCurrentDate] = useState<string | undefined>();
-  const [currentTime, setCurrentTime] = useState<number | string | undefined>();
-  const [currentInstructor, setCurrentInstructor] = useState<
-    number | string | undefined
-  >();
+  const [formState, formDispatch] = useReducer(editFormReducer, {
+    date,
+    time,
+    instructor,
+  });
 
   const firstSelect = useRef<any>(null);
   const secondSelect = useRef<any>(null);
@@ -32,13 +66,6 @@ export default function EditForm(props: Props) {
   const dispatch = useAppDispatch();
 
   const { t } = useTranslation();
-
-  useEffect(() => {
-    setOriginDate(date);
-    setCurrentDate(date);
-    setCurrentTime(time);
-    setCurrentInstructor(instructor);
-  }, []);
 
   const onSetDate = (props: Date | null | undefined) => {
     const pickerDate = props;
@@ -49,20 +76,19 @@ export default function EditForm(props: Props) {
     if (pickerDate) {
       month = pickerDate?.getMonth() + 1;
       const newDate = `${year}-${month}-${day}`;
-      setCurrentDate(newDate);
+      formDispatch({ type: "setDate", payload: newDate });
     } else {
       console.log("no date on datepicker of editform");
-      setCurrentDate("");
+      formDispatch({ type: "setDate", payload: "" });
     }
   };
 
-  //Commonselect
   const handleSelectedValue = (props: number | string | undefined) => {
     const selectedValue = props;
 
     typeof selectedValue === "number"
-      ? setCurrentTime(selectedValue)
-      : setCurrentInstructor(selectedValue);
+      ? formDispatch({ type: "setTime", payload: selectedValue })
+      : formDispatch({ type: "setInstructor", payload: selectedValue });
   };
 
   async function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -70,9 +96,9 @@ export default function EditForm(props: Props) {
 
     const payload = {
       id,
-      date: currentDate,
-      time: currentTime,
-      instructor: currentInstructor,
+      date: formState.date,
+      time: formState.time,
+      instructor: formState.instructor,
     };
 
     dispatch(edit(payload));
@@ -82,12 +108,10 @@ export default function EditForm(props: Props) {
       secondSelect.current.clearValue();
     }
 
-    setCurrentTime(undefined);
-    setCurrentInstructor(undefined);
-
-    if (originDate === currentDate) {
-      setCurrentDate("");
-    }
+    formDispatch({
+      type: "resetAfterSubmit",
+      payload: { date: date === formState.date ? "" : formState.date },
+    });
 
     const modalCloseBtn: HTMLElement | null =
       document.querySelector(".modalCloseBtn");
@@ -104,12 +128,12 @@ export default function EditForm(props: Props) {
     <div className="bg-white mx-5 my-[48px] px-5 py-[30px] rounded">
       <form onSubmit={onSubmit}>
         <label>
-          {t("form-title1")} : {currentDate}
+          {t("form-title1")} : {formState.date}
           <PickerDate handleDate={onSetDate} />
         </label>
         <br></br>
         <label>
-          {t("form-title2")} : {currentTime}
+          {t("form-title2")} : {formState.time}
           <CommonSelect
             type="time"
             mySelectRef={firstSelect}
@@ -118,7 +142,7 @@ export default function EditForm(props: Props) {
         </label>
         <br></br>
         <label>
-          {t("form-title3")} : {currentInstructor}
+          {t("form-title3")} : {formState.instructor}
           <CommonSelect
             type="instructor"
             mySelectRef={secondSelect}

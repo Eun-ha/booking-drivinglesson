@@ -1,5 +1,5 @@
 "use client";
-import { FormEvent, useRef, useState } from "react";
+import { FormEvent, useReducer, useRef } from "react";
 import { useAppDispatch } from "@/store/store";
 import PickerDate from "@/components/PickerDate";
 import { insert } from "./../store/bookingSlice";
@@ -10,15 +10,41 @@ import { CommonSelect } from "./CommonSelect";
 import SubmitBtn from "./SubmitBtn";
 import { useTranslation } from "react-i18next";
 
-export function Form() {
-  const [date, setDate] = useState<string | undefined>();
+type FormState = {
+  date?: string;
+  time?: number | string;
+  instructor?: number | string;
+};
 
-  const [selectedTime, setselectedTime] = useState<number | string | undefined>(
-    undefined
-  );
-  const [selectedInstructor, setselectedInstructor] = useState<
-    number | string | undefined
-  >(undefined);
+type FormAction =
+  | { type: "setDate"; payload?: string }
+  | { type: "setTime"; payload?: number | string }
+  | { type: "setInstructor"; payload?: number | string }
+  | { type: "resetSelections" };
+
+const initialState: FormState = {
+  date: undefined,
+  time: undefined,
+  instructor: undefined,
+};
+
+function formReducer(state: FormState, action: FormAction): FormState {
+  switch (action.type) {
+    case "setDate":
+      return { ...state, date: action.payload };
+    case "setTime":
+      return { ...state, time: action.payload };
+    case "setInstructor":
+      return { ...state, instructor: action.payload };
+    case "resetSelections":
+      return { ...state, time: undefined, instructor: undefined };
+    default:
+      return state;
+  }
+}
+
+export function Form() {
+  const [formState, formDispatch] = useReducer(formReducer, initialState);
 
   const firstSelect = useRef<any>(null);
   const secondSelect = useRef<any>(null);
@@ -27,7 +53,6 @@ export function Form() {
 
   const { t } = useTranslation();
 
-  //PickerDate
   const onSetDate = (props: Date | null | undefined) => {
     const pickerDate = props;
     const year = pickerDate?.getFullYear();
@@ -37,19 +62,18 @@ export function Form() {
     if (pickerDate) {
       month = pickerDate?.getMonth() + 1;
       const newDate = `${year}-${month}-${day}`;
-      setDate(newDate);
+      formDispatch({ type: "setDate", payload: newDate });
     } else {
       console.log("no date on datepicker of form");
     }
   };
 
-  //Commonselect
   const handleSelectedValue = (props: number | string | undefined) => {
     const selectedValue = props;
 
     typeof selectedValue === "number"
-      ? setselectedTime(selectedValue)
-      : setselectedInstructor(selectedValue);
+      ? formDispatch({ type: "setTime", payload: selectedValue })
+      : formDispatch({ type: "setInstructor", payload: selectedValue });
   };
 
   function onSubmit(event: FormEvent<HTMLFormElement>) {
@@ -57,16 +81,16 @@ export function Form() {
 
     const payload = {
       id: uuid(),
-      date: date,
-      time: selectedTime,
-      instructor: selectedInstructor,
+      date: formState.date,
+      time: formState.time,
+      instructor: formState.instructor,
     };
 
-    if (selectedTime === undefined) {
+    if (formState.time === undefined) {
       toast.error(`${t("toast-text3")}`, { duration: 2000 });
       return;
     }
-    if (selectedInstructor === undefined) {
+    if (formState.instructor === undefined) {
       toast.error(`${t("toast-text4")}`, { duration: 2000 });
       return;
     }
@@ -87,8 +111,7 @@ export function Form() {
       closeIcon.click();
     }
 
-    setselectedTime(undefined);
-    setselectedInstructor(undefined);
+    formDispatch({ type: "resetSelections" });
   }
 
   return (
