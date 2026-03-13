@@ -1,11 +1,11 @@
 "use client";
 
 import { RadioContext } from "@/context/RadioContext";
-import { Dispatch, ReactNode, SetStateAction } from "react";
+import { ReactNode } from "react";
 
 type Rest = {
   value: string;
-  onChange: Dispatch<SetStateAction<string>>;
+  onChange: (value: string) => void;
 };
 
 //type alias

@@ -2,12 +2,11 @@ import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, useSelector, useStore } from "react-redux";
 import { bookingReducer } from "./bookingSlice";
 import storage from "redux-persist/lib/storage";
-import { persistReducer } from "redux-persist";
+import { FLUSH, PAUSE, PERSIST, persistReducer, PURGE, REGISTER, REHYDRATE } from "redux-persist";
 
 const persistConfig = {
-  key: "todos",
+  key: "booking",
   storage,
-  whitelist: ["todos"],
 };
 
 const persistedReducer = persistReducer(persistConfig, bookingReducer);
@@ -17,7 +16,11 @@ export const store = configureStore({
     booking: persistedReducer,
   },
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({ serializableCheck: false }),
+    getDefaultMiddleware({
+      serializableCheck: {
+        ignoredActions: [FLUSH, REHYDRATE, PAUSE, PERSIST, PURGE, REGISTER],
+      },
+    }),
 });
 
 type AppStore = typeof store;
