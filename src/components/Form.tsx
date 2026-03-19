@@ -1,8 +1,8 @@
 "use client";
 import { FormEvent, useReducer, useRef } from "react";
-import { useAppDispatch } from "@/store/store";
+import { useAppDispatch, useAppSelector } from "@/store/store";
 import PickerDate from "@/components/PickerDate";
-import { insert } from "./../store/bookingSlice";
+import { insertAsync } from "./../store/bookingSlice";
 import toast from "react-hot-toast";
 import React from "react";
 import uuid from "react-uuid";
@@ -50,6 +50,7 @@ export function Form() {
   const secondSelect = useRef<any>(null);
 
   const dispatch = useAppDispatch();
+  const bookingStatus = useAppSelector((state) => state.booking.status);
 
   const { t } = useTranslation();
 
@@ -76,7 +77,7 @@ export function Form() {
       : formDispatch({ type: "setInstructor", payload: selectedValue });
   };
 
-  function onSubmit(event: FormEvent<HTMLFormElement>) {
+  async function onSubmit(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
 
     const payload = {
@@ -95,8 +96,14 @@ export function Form() {
       return;
     }
 
-    dispatch(insert(payload));
-    toast.success(`${t("toast-text5")}`, { duration: 2000 });
+    try {
+      await dispatch(insertAsync(payload)).unwrap();
+      toast.success(`${t("toast-text5")}`, { duration: 2000 });
+    } catch (error) {
+      const errorMessage = typeof error === "string" ? error : "예약 저장에 실패했습니다.";
+      toast.error(errorMessage, { duration: 2000 });
+      return;
+    }
 
     if (firstSelect.current || secondSelect.current) {
       firstSelect.current.clearValue();
@@ -137,7 +144,7 @@ export function Form() {
           handleTime={handleSelectedValue}
         />
       </label>
-      <SubmitBtn type="save" />
+      <SubmitBtn type="save" disabled={bookingStatus === "loading"} />
     </form>
   );
 }
